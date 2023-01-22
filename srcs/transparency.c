@@ -6,11 +6,11 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:50:07 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/19 23:04:18 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/21 23:15:50 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 /*Apply the given color to the pixel (x,y) of an image*/
 void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color)

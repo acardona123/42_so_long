@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:21:11 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/20 01:01:01 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/21 23:21:52 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ void	ft_rainbow(t_data *data, int center_x, int center_y, int radius_min, int ra
 	int	x;
 	int	y0;
 	int	y;
-	int r2;
+	int	r;
+	int	color;
 
 	if (radius_max <= radius_min || radius_min < 0 || center_x + radius_max < 0 || center_x - radius_max > WIDTH
 		|| center_y < 0 || center_y - radius_max > HEIGHT)
@@ -108,21 +109,75 @@ void	ft_rainbow(t_data *data, int center_x, int center_y, int radius_min, int ra
 		y0 = center_y - radius_max - 1;
 	else
 		y0 = 0;
-	while (x <= WIDTH && x <= center_x + radius_max + 1)
+	while (x <= WIDTH && x <= center_x)
 	{
 		y = y0;
-		while (y <= HEIGHT && y <= center_y + radius_max + 1)
+		while (y <= HEIGHT && y <= center_y)
 		{
-			r2 = (x - center_x) * (x - center_x) + (y - center_y) * (y - center_y);
-			if (r2 <= radius_max * radius_max && r2 >= radius_min * radius_min)
+			r = sqrt((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y));
+			if (r <= radius_min + (radius_max - radius_min) / 2  + (radius_max - radius_min) % 2 && r >= radius_min)
 			{
-				ft_my_mlx_pixel_put(data, x, y,(sqrt(r2) - radius_min) * 0xFF0000 / (radius_max - radius_min));
+				color = ((r - radius_min) * 0xFF * 2 / (radius_max - radius_min));
+				color = (color << 8) + 0xFF - color;
+				ft_my_mlx_pixel_put(data, x, y, color);
+				ft_my_mlx_pixel_put(data, center_x + radius_max - x, y, color);
+				ft_my_mlx_pixel_put(data, center_x  + radius_max - x, center_y + radius_max - y , color);
+				ft_my_mlx_pixel_put(data, x, center_y + radius_max - y, color);
+			}
+			else if (r <= radius_max && r > (radius_max - radius_min) / 2 + radius_min)
+			{
+				color = ((r - radius_min) * 255 * 2 / (radius_max - radius_min));
+				color = (color << 16) + ((255 - color) << 8);
+				ft_my_mlx_pixel_put(data, x, y, color);
+				ft_my_mlx_pixel_put(data, center_x + radius_max - x, y, color);
+				ft_my_mlx_pixel_put(data, center_x  + radius_max - x, center_y + radius_max - y , color);
+				ft_my_mlx_pixel_put(data, x, center_y + radius_max - y, color);
 			}
 			y++;
 		}
 		x++;
 	}
 }
+
+void ft_disk_shadow(t_data *data, int center_x, int center_y, int radius_min, int radius_max)
+{
+	int	x;
+	int	y;
+	int	r;
+	unsigned int	pxl;
+
+	y = center_y - radius_max;
+	while (y < HEIGHT && y <= center_y + radius_max)
+	{
+		x = center_x - radius_max;
+		while (x < WIDTH && x <= center_x + radius_max)
+		{
+			r = (int)sqrt((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y));//((r - radius_min) * 255 / (radius_max - radius_min)) << 24
+			
+			if (r >= radius_min && r < radius_max)
+			{
+				// pxl = 255;
+				// ft_my_mlx_pixel_put(data, x, y, 255);
+				ft_blend_pxl((unsigned int *)(data->addr + x * data->bits_per_pixel / 8 + y * data->line_length), &pxl);
+			}
+			x++;
+		}
+		printf("y : %d \n", y);
+		y++;
+	}
+}
+
+// void ft_circle_rainbow(t_data *data, int center_x, int center_y, int radius)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	y0;
+
+// 	if (center_x - radius || y0 < 0)
+// 		return ;
+	
+// }
+
 /*
 
 int	main(void)
@@ -151,7 +206,7 @@ int	main(void)
 /*===== HOOKS =====*/
 
 /**/
-int	ft_key_hook(int key_code, t_vars *param)
+int	ft_key_hook(int key_code, t_global *param)
 {
 	if (key_code == XK_w || key_code == XK_Up)
 		printf("w\n");
@@ -188,7 +243,7 @@ int	ft_expose_hook(void *param)
 
 int	main(void)
 {
-	t_vars	vars;
+	t_global	vars;
 	t_data	img;
 
 	vars.mlx = mlx_init();
@@ -197,13 +252,14 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 
-	ft_circle(&img, 70, 70, 60, 0x00FF0000);
-	ft_square(&img, 70, 70, 70, 0x0000FF00);
-	ft_hexagon(&img, 70, 70, 40, 0x000000FF);
-	ft_rainbow(&img, WIDTH / 2, HEIGHT/2, 10, HEIGHT / 2 - 10);
+	// ft_circle(&img, 70, 70, 60, 0x00FF0000);
+	// ft_square(&img, 70, 70, 70, 0x0000FF00);
+	// ft_hexagon(&img, 70, 70, 40, 0x000000FF);
+	//ft_rainbow(&img, WIDTH / 2, HEIGHT/2, 10, HEIGHT / 2 - 10);
+	ft_square(&img, WIDTH / 2, WIDTH / 2, WIDTH, 0x0000FF00);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 	mlx_pixel_put(vars.mlx, vars.win, 70, 70, 0xFFFF0000);
-	
+	ft_disk_shadow(&img, WIDTH / 2, WIDTH / 2, 10, WIDTH / 2 - 20);
 	mlx_key_hook(vars.win, &ft_key_hook, &vars); 
 	mlx_mouse_hook(vars.win, &ft_mouse_hook, &vars);
 	mlx_loop(vars.mlx);

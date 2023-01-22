@@ -7,6 +7,7 @@ C_FLAGS_DEBUG	=	-g
 INCLUDES_DIR	=	includes/
 SRC_DIR			=	srcs/
 OBJ_DIR			=	obj/
+TESTS_DIR		=	tests/
 LIB_PERSO		=	
 LIBS			=	-L$(INCLUDES_DIR)mlx -lmlx -lXext -lX11 -lm $(LIB_PERSO)
 DEPS			=	$(INCLUDES_DIR)so_long.h Makefile
@@ -14,9 +15,11 @@ INCLUDES_H		=	-I./$(INCLUDES_DIR) -I./$(INCLUDES_DIR)mlx
 
 SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
 					transparency \
-					decouverte\
 					))
-OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
+TESTS			=	$(addprefix $(TESTS_DIR)test_, $(addsuffix .c, \
+					decouverte \
+					))
+OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC) $(TESTS))
 
 all : $(NAME)
 
