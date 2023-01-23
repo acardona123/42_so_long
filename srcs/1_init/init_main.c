@@ -6,12 +6,13 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:00:04 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 02:57:22 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/23 03:14:37 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
+/*Calculates local endian and injects it into the global strucure glo*/
 static void	fts_init_local_endian_init(t_global *glo, char debug)
 {
 	int	a;
@@ -28,6 +29,7 @@ static void	fts_init_local_endian_init(t_global *glo, char debug)
 	}
 }
 
+/*Initializes mlx and injects it into the global strucure glo*/
 static void	fts_init_xvars_init(t_global *glo, char debug)
 {
 	if (debug)
@@ -40,6 +42,7 @@ static void	fts_init_xvars_init(t_global *glo, char debug)
 		write(1, " ok\n", 4);
 }
 
+/*Initializes mlx_window and injects it into the global strucure glo*/
 static void	fts_init_win_init(t_global *glo, char debug)
 {
 	if (debug)
@@ -52,6 +55,7 @@ static void	fts_init_win_init(t_global *glo, char debug)
 		write(1, " ok\n", 4);
 }
 
+/*Initialize the global strucure glo starting launghing mlx, textures, ...*/
 void	ft_init_main(t_global *glo, char debug)
 {
 	write(1, "==== Game initialisation ====\n\n", 32);
@@ -60,7 +64,9 @@ void	ft_init_main(t_global *glo, char debug)
 	fts_init_xvars_init(glo, debug);
 	fts_init_win_init(glo, debug);
 	ft_init_textures_init(glo, debug);
-	/*
-	initialiser les img qui serviront pour l'affichage (avec glo->map_size) 
-	*/
+
+	/* to do :
+	initialiser les img qui serviront pour l'affichage (avec glo->map_size) */
+	
 }
+

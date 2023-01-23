@@ -1,0 +1,10 @@
+- init_main.c :
+	- creer fonction initialisation img
+	&&
+	- initialiser les img qui serviront pour l'affichage (avec glo->map_size)
+
+- end_close.c :
+	remplir ft_end_close
+
+- test_garbage_collector.c :
+	refaire les tests entierement pour verifer fonctionnement et leaks.
