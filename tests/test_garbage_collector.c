@@ -1,5 +1,5 @@
 /*
-clear && gcc -Werror -Wextra -Wall -g tests/test_garbage_collector.c -o test srcs/garbage_collector.c && valgrind --leak-check=full  ./test && rm test
+ clear && gcc -Werror -Wextra -Wall -g tests/test_garbage_collector.c srcs/garbage/garbage_collector_0_groups.c srcs/garbage/garbage_collector_1_units.c -o test && valgrind  ./test && rm test
 */
 
 #include "../includes/so_long.h"
@@ -11,7 +11,7 @@ clear && gcc -Werror -Wextra -Wall -g tests/test_garbage_collector.c -o test src
 // 	int	*ptr1;
 // 	int	*ptr2;
 // 	int	*ptr3;
-// 	t_list	*garbage;
+// 	t_garb_list	*garbage;
 
 // 	garbage = 0;
 // 	ptr1 = 0;
@@ -50,12 +50,12 @@ int main(void)
 	int	*ptr3;
 
 	gl.garb_group = 0;
-	ptr1 = 0;
-	ptr2 = 0;
-	ptr3 = 0;
 	gl.garb_img = 0;
 	gl.garb_win = 0;
 	gl.garb_ptr = 0;
+	// ptr1 = 0;
+	// ptr2 = 0;
+	// ptr3 = 0;
 	gl.garb_img = ft_garbage_init(&gl.garb_group, free);
 	gl.garb_win = ft_garbage_init(&gl.garb_group, free);
 	gl.garb_ptr = ft_garbage_init(&gl.garb_group, free);

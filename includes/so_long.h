@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/22 01:30:39 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/23 02:52:08 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 # define SO_LONG_H
 # include "mlx/mlx.h"
 # include "mlx/mlx_int.h"
+# include "garbage.h"
 # define WIDTH 1024
 # define HEIGHT 1024
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}	t_list;
-
-typedef struct s_garbage
-{
-	t_list	**parent_group;
-	void	(*del_function)(void *);
-	t_list	*first;
-}	t_garbage;
+# define PATH_EXIT ""
+# define PATH_GROUND ""
+# define PATH_PLAYER ""
+# define PATH_WALL ""
+# define PATH_FRUIT ""
 
 typedef struct s_data
 {
@@ -64,26 +57,27 @@ typedef struct s_frames
 
 typedef struct s_global
 {
-	void			*mlx;
-	void			*win;
-	t_texture_pack	*textures;
-	t_list			*garb_group;
-	t_garbage		*garb_img;
-	t_garbage		*garb_win;
-	t_garbage		*garb_ptr;
+	int					local_endian;
+	t_garbage_resume	garb;
+	void				*mlx;
+	void				*win;
+	t_texture_pack		*textures;
+	int					map_size;
 }	t_global;
 
-/*garbage_collector_0_groups.c*/
-void		ft_garbage_group_add_garb(t_list **group, t_garbage *garb);
-int			ft_garbage_group_free(t_list **group, int error_exit);
+/* 
 
-/*garbage_collector_1_units.c*/
-t_garbage	*ft_garbage_init(t_list	**group, void (*del)(void *));
-int			ft_garbage_free_one(t_garbage *garb, void *content_target);
-int			ft_garbage_free(t_garbage *garb, int error_exit);
-int			ft_garbage_add(t_garbage *garb, void *ptr);
-int			ft_my_malloc(t_garbage *garb, void **dst, size_t size);
+===== GARBAGE =====
+garbage_collector_init.c */
+void		ft_garbage_collector_init(t_global *glo, char debug);
+/*
 
+===== INIT/ =====
+init_main.c*/
+void		ft_init_main(t_global *glo, char debug);
+/*
+ init_textures.c*/
+void		ft_init_textures_init(t_global *glo, char debug);
 /*transparency.c*/
 void		ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top);
