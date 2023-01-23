@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 21:56:53 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 01:41:03 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:19:32 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,20 @@ typedef struct s_garbage_resume
 }	t_garbage_resume;
 
 /*
- garbage_collector_build0_groups */
+ garbage_collector_build0_groups.c */
 void			ft_garbage_group_init(t_garbage_resume *garb_lst);
 t_garb_del_arg	*ft_garbage_del_arg_init(t_garbage_resume *garb_lst, void *arg1,
 					void *arg2, void *arg3);
 void			ft_garbage_group_add_garb(t_garb_list **group, t_garbage *garb);
 int				ft_garbage_group_free(t_garb_list **group, int error_exit);
 /*
- garbage_collector_build1_units*/
+ garbage_collector_build1_units.c */
 t_garbage		*ft_garbage_special_init(t_garbage_resume *garb_lst,
 					t_garb_del_arg *del_args,
 					void (*del_function)(t_garb_del_arg *, void *to_free));
 int				ft_garbage_free_one(t_garbage *garb, void *content_target);
 int				ft_garbage_free(t_garbage *garb, int error_exit);
 int				ft_garbage_add(t_garbage *garb, void *ptr);
-int				ft_my_malloc(t_garbage *garb, void **dst, size_t size);
 /*
  garbage_collector_free_ftn.c */
 void			ft_garbage_del_gbptr(t_garb_del_arg *args, void *to_del);
@@ -69,6 +68,9 @@ void			ft_garbage_del_gbwin(t_garb_del_arg *args, void *to_del);
 /*
  garbage_collector_init.c 
  cf so_long.h*/
+/*
+ garbage_collector_my_malloc.c */
+void			*ft_my_malloc(t_garbage *garb, size_t size);
 
 #endif
 

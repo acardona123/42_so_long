@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 02:52:08 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:23:33 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define PATH_PLAYER ""
 # define PATH_WALL ""
 # define PATH_FRUIT ""
+
 
 typedef struct s_data
 {
@@ -51,7 +52,7 @@ typedef struct s_texture_pack
 
 typedef struct s_frames
 {
-	t_data			*frame;
+	t_data			frame;
 	struct s_frames	*next;
 }	t_frames;
 
@@ -62,23 +63,39 @@ typedef struct s_global
 	void				*mlx;
 	void				*win;
 	t_texture_pack		*textures;
-	int					map_size;
+	t_frames			*frames;
+	int					move_cpt;
+	int					map_h;
+	int					map_w;
+	int					chunk_size;
 }	t_global;
 
 /* 
 
 ===== GARBAGE =====
+voir garbage.h et 
 garbage_collector_init.c */
 void		ft_garbage_collector_init(t_global *glo, char debug);
 /*
 
-===== INIT/ =====
-init_main.c*/
-void		ft_init_main(t_global *glo, char debug);
+===== INIT =====
+init_main_init_pre_parsing.c */
+void		ft_init_main_init_pre_parsing(t_global *glo, char debug);
+/*
+ init_main_init_post_parsing.c */
+void		ft_init_main_init_post_parsing(t_global *glo, char debug);
 /*
  init_textures.c*/
 void		ft_init_textures_init(t_global *glo, char debug);
-/*transparency.c*/
+/*
+
+===== END =====
+ end_close.c*/
+void		ft_end_close(t_global *glo, char debug);
+/*
+
+===== TOOLS =====
+ transparency.c*/
 void		ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top);
 void		ft_blend_img(t_data *back, t_data *top, int x0, int y0);

@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:53:25 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 02:57:14 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:16:14 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,5 @@ int	ft_garbage_add(t_garbage *garb, void *ptr)
 	else
 		new_elem->next = 0;
 	garb->first = new_elem;
-	return (0);
-}
-
-/*Act as malloc but saves malloced pointers into garbage collector*/
-int	ft_my_malloc(t_garbage *garb, void **dst, size_t size)
-{
-	if (!garb || !dst)
-		return (1);
-	if (ft_garbage_free_one(garb, *dst) == 0)
-		write(1, "\e[31;1m/!\\ Realocation of malloced pointer.\e[0m\n", 48);
-	*dst = malloc(size);
-	if (!dst)
-		ft_garbage_free(garb, 1);
-	ft_garbage_add(garb, *dst);
 	return (0);
 }

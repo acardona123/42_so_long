@@ -13,11 +13,32 @@ LIBS			=	-L$(INCLUDES_DIR)mlx -lmlx -lXext -lX11 -lm $(LIB_PERSO)
 DEPS			=	$(INCLUDES_DIR)so_long.h Makefile
 INCLUDES_H		=	-I./$(INCLUDES_DIR) -I./$(INCLUDES_DIR)mlx
 
-SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
+SRC_GARBABE		=	$(addprefix 0_garbage_collector/, \
+					garbage_collector_build0_groups \
+					garbage_collector_build1_units \
+					garbage_collector_free_ftn \
+					garbage_collector_init \
+					garbage_collector_my_malloc \
+					)
+SRC_INIT		=	$(addprefix 1_init/, \
+					init_main_init_pre_parsing \
+					init_main_init_post_parsing \
+					init_textures \
+					init_hooks \
+					)
+SRC_END			=	$(addprefix 8_end/, \
+					end_close \
+					)
+SRC_TOOLS		=	$(addprefix 9_tools/, \
 					transparency \
+					)
+SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
+					$(SRC_GARBABE) \
+					$(SRC_INIT) \
+					$(SRC_END) \
 					))
-TESTS			=	$(addprefix $(TESTS_DIR)test_, $(addsuffix .c, \
-					decouverte \
+TESTS			=	$(addprefix $(TESTS_DIR), $(addsuffix .c, \
+					test_garbage_collector \
 					))
 OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC) $(TESTS))
 

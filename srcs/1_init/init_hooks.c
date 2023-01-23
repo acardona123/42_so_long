@@ -1,21 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_hooks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 19:00:17 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 16:08:36 by acardona         ###   ########.fr       */
+/*   Created: 2023/01/23 10:52:30 by acardona          #+#    #+#             */
+/*   Updated: 2023/01/23 10:53:01 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../../includes/so_long.h"
 
-int	main(void)
-{
-	t_global	glob;
-
-	ft_init_main_init_pre_parsing(&glob, 0);
-	return (0);
-}

@@ -6,81 +6,52 @@
 
 #include <stdio.h>
 
-// int main(void)
-// {
-// 	int	*ptr1;
-// 	int	*ptr2;
-// 	int	*ptr3;
-// 	t_garb_list	*garbage;
-
-// 	garbage = 0;
-// 	ptr1 = 0;
-// 	ptr2 = 0;
-// 	ptr3 = 0;
-// 	printf("Premier malloc : \n");
-// 	ft_my_malloc(&garbage, (void **)&ptr1, sizeof(int));
-// 	printf("\nDeuxieme malloc : \n");
-// 	ft_my_malloc(&garbage, (void **)&ptr2, sizeof(int));
-// 	printf("\nTroisieme malloc : \n");
-// 	ft_my_malloc(&garbage, (void **)&ptr3, 2 * sizeof(int));
-
-// 	*ptr1 = 3;
-// 	*ptr2 = 4;
-// 	*ptr3 = 4;
-
-// 	printf("\nApres malloc :\nptr1 : %p\nptr2 : %p\n", ptr1, ptr2);
-// 	printf("garbage : %p (content : %p)\ngarbage->next : %p (content : %p)\n", garbage, garbage->content, garbage->next, garbage->next->content);
-// 	printf("Reste avant free one : %p, %p\n\n", garbage, garbage->next);
-
-// 	// ft_garbage_free_one(&garbage, (void *)ptr1);
-// 	// ft_garbage_free_one(&garbage, (void *)ptr2);
-// 	ft_garbage_free_one(&garbage, (void *)ptr3);
-
-// 	printf("Reste apres free one : %p, %p\n", garbage, NULL);
-// 	ft_garbage_free(&garbage, 0);
-// 	return (0);
-// }
-
-
-int main(void)
+int	main(void)
 {
-	t_global	gl;
-	int	*ptr1;
-	int	*ptr2;
-	int	*ptr3;
+	t_global	glo;
+	int			test;
 
-	gl.garb_group = 0;
-	gl.garb_img = 0;
-	gl.garb_win = 0;
-	gl.garb_ptr = 0;
-	// ptr1 = 0;
-	// ptr2 = 0;
-	// ptr3 = 0;
-	gl.garb_img = ft_garbage_init(&gl.garb_group, free);
-	gl.garb_win = ft_garbage_init(&gl.garb_group, free);
-	gl.garb_ptr = ft_garbage_init(&gl.garb_group, free);
+	glo.local_endian = 0;
+	glo.garb.gbgroup = 0;
+	glo.garb.gbimg = 0;
+	glo.garb.gbptr = 0;
+	glo.garb.gbwin = 0;
+	glo.garb.gbxvar = 0;
+	glo.mlx = 0;
+	glo.win = 0;
+	glo.textures = 0;
+	glo.frames = 0;
+	glo.move_cpt = 0;
 
-	printf("Premier malloc : \n");
-	ft_my_malloc(gl.garb_img, (void **)&ptr1, sizeof(int));
-	printf("\nDeuxieme malloc : \n");
-	ft_my_malloc(gl.garb_img, (void **)&ptr2, sizeof(int));
-	printf("\nTroisieme malloc : \n");
-	ft_my_malloc(gl.garb_img, (void **)&ptr3, 2 * sizeof(int));
+	ft_init_main_init_pre_parsing (&glo, 0);
+	glo.map_h = 100; /*3 lignes simulant la reussite du parsing*/
+	glo.map_w = 200;
+	glo.chunk_size = 16;
+	ft_init_main_init_post_parsing(&glo, 0);
 
-	*ptr1 = 3;
-	*ptr2 = 4;
-	*ptr3 = 4;
+	test = 2;
 
-	// printf("\nApres malloc :\nptr1 : %p\nptr2 : %p\n", ptr1, ptr2);
-	// printf("garbage : %p (content : %p)\ngarbage->next : %p (content : %p)\n", gl.garb_img, gl.garb_img->first->content, gl.garb_img->next, gl.garb_img->next->content);
-	// printf("Reste avant free one : %p, %p\n\n", gl.garb_img, gl.garb_img->next);
+	if (test == 0)
+		ft_garbage_free_one(glo.garb.gbwin, glo.win);
+	else if (test == 1)
+	{
+		ft_garbage_free(glo.garb.gbimg, 0);
+		ft_garbage_free(glo.garb.gbwin, 0);
+		ft_garbage_free(glo.garb.gbxvar, 0);
+		ft_garbage_free(glo.garb.gbptr, 0);
+	}
+	else if (test == 2)
+	{
+		ft_garbage_group_free(&(glo.garb.gbgroup), 
+		0);
+		//free(glo.mlx);
+	}
 
+	//ft_garbage_free(gl.gbimg, 0);
 
-	ft_garbage_group_free(&gl.garb_group, 0);
-	// ft_garbage_free_one(&gl.garb_img, (void *)ptr1);
-	// ft_garbage_free_one(&gl.garb_img, (void *)ptr2);
-	//ft_garbage_free_one(gl.garb_img, (void *)ptr3);
-	// printf("Reste apres free one : %p, %p\n", gl.garb_img, NULL);
-	//ft_garbage_free(gl.garb_img, 0);
+	// ft_garbage_free_one(&gl.gbimg, (void *)ptr2);
+	//ft_garbage_free_one(gl.gbimg, (void *)ptr3);
+	// ft_garbage_group_free(&(glo.garb.gbgroup), 0);
+	// printf("Reste apres free one : %p, %p\n", gl.gbimg, NULL);
 	return (0);
 }

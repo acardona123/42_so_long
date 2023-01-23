@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 00:40:14 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 00:51:59 by acardona         ###   ########.fr       */
+/*   Updated: 2023/01/23 16:12:41 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,27 @@ void	ft_garbage_group_init(t_garbage_resume *garb_lst)
 	garb_lst->gbptr->first = 0;
 	garb_lst->gbptr->parent_group = &(garb_lst->gbgroup);
 	ft_garbage_group_add_garb(&(garb_lst->gbgroup), garb_lst->gbptr);
+	ft_garbage_add(garb_lst->gbptr, args);
 }
 
+/*Generate the struct containing the bonus arguments necessary to free a ptr*/
 t_garb_del_arg	*ft_garbage_del_arg_init(t_garbage_resume *garb_lst, void *arg1,
 	void *arg2, void *arg3)
 {
-	void	*args;
+	t_garb_del_arg	*args;
 
-	ft_my_malloc(garb_lst->gbptr, args, sizeof(t_garb_del_arg));
-	((t_garb_del_arg *)args)->arg1 = arg1;
-	((t_garb_del_arg *)args)->arg2 = arg2;
-	((t_garb_del_arg *)args)->arg3 = arg3;
-	return ((t_garb_del_arg *)args);
+	args = (t_garb_del_arg *)ft_my_malloc(garb_lst->gbptr,
+			sizeof(t_garb_del_arg));
+	args->arg1 = 0;
+	args->arg2 = 0;
+	args->arg3 = 0;
+	if (arg1)
+		args->arg1 = arg1;
+	if (arg2)
+		args->arg2 = arg2;
+	if (arg3)
+		args->arg3 = arg3;
+	return (args);
 }
 
 /*add garb to the garbage list*/
@@ -72,7 +81,7 @@ int	ft_garbage_group_free(t_garb_list **group, int error_exit)
 
 	if (!*group)
 		exit (error_exit);
-	elem = *group;
+	elem = (*group);
 	while (elem)
 	{
 		tmp = elem->next;
@@ -81,6 +90,7 @@ int	ft_garbage_group_free(t_garb_list **group, int error_exit)
 		free(elem);
 		elem = tmp;
 	}
+	*group = 0;
 	if (error_exit)
 		exit(error_exit);
 	return (0);
