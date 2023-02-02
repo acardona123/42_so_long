@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:24:01 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 20:48:44 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:13:10 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	fts_parse_lst_to_tab(t_global *glo, char **map, t_list **lst)
 }
 
 /*Convert a mapfile into a string and set the number of lines in glostruct*/
-void	ft_parse_file_to_map(t_global *glo, int *fd, char **map, char debug)
+void	ft_parsing_file_to_map(t_global *glo, int *fd, char **map, char debug)
 {
 	t_list	*lst;
 	t_list	*elem;

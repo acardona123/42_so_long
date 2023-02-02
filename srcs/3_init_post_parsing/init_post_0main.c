@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_post_main.c                                   :+:      :+:    :+:   */
+/*   init_post_0main.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:53:24 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 20:11:22 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:07:50 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
 /*Initializes mlx and injects it into the global structure glo*/
-static void	fts_init_xvars_init(t_global *glo, char debug)
+static void	fts_init_post_xvars_init(t_global *glo, char debug)
 {
 	if (debug)
 		write(1, "=> mlx init :\n", 14);
@@ -27,7 +27,7 @@ static void	fts_init_xvars_init(t_global *glo, char debug)
 }
 
 /*Initializes mlx_window and injects it into the global strucure glo*/
-static void	fts_init_win_init(t_global *glo, char debug)
+static void	fts_init_post_win_init(t_global *glo, char debug)
 {
 	if (debug)
 		write(1, "=> mlx window init:\n", 20);
@@ -40,7 +40,7 @@ static void	fts_init_win_init(t_global *glo, char debug)
 }
 
 /*initializes 2 img (map size) used later as canvas to displayed on the window*/
-static void	fts_init_frames_init(t_global *glo, char debug)
+static void	fts_init_post_frames_init(t_global *glo, char debug)
 {
 	t_frames	*frame1;
 	t_frames	*frame2;
@@ -70,12 +70,12 @@ static void	fts_init_frames_init(t_global *glo, char debug)
 }
 
 /*Finish initialization of global structure after parsing(need map dimensions)*/
-void	ft_init_main_init_post_parsing(t_global *glo, char debug)
+void	ft_init_post_parsing_main(t_global *glo, char debug)
 {
-	fts_init_xvars_init(glo, debug);
-	fts_init_win_init(glo, debug);
-	//ft_init_textures_init(glo, debug); 
-	fts_init_frames_init(glo, debug);
+	fts_init_post_xvars_init(glo, debug);
+	fts_init_post_win_init(glo, debug);
+	//ft_init_post_textures_init(glo, debug); 
+	fts_init_post_frames_init(glo, debug);
 	/*
 	to do : hooks init
 	*/

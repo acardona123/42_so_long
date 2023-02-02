@@ -6,21 +6,11 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 18:54:18 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 20:20:12 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:38:45 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-
-static void	fts_parse_free_map(int	map_H, char **map)
-{
-	int	y;
-
-	y = 0;
-	while (y < map_H)
-		free(map[y]);
-	free(map);
-}
 
 /*ON MAP COPY: sub recursive searching of exit starting at p point*/
 static int	fts_check_map_step(t_global *glo, char **map, t_coord p)
@@ -44,7 +34,7 @@ static int	fts_check_map_step(t_global *glo, char **map, t_coord p)
 	return (find);
 }
 
-void	ft_parse_check_map_path(t_global *glo, char **map, char debug)
+void	ft_parsing_check_map_path(t_global *glo, char **map, char debug)
 {
 	t_coord	start;
 	char	**map_cpy;
@@ -65,7 +55,7 @@ void	ft_parse_check_map_path(t_global *glo, char **map, char debug)
 		ft_garbage_free_one(glo->garb.gbptr, map_cpy[y]);
 	ft_garbage_free_one(glo->garb.gbptr, map_cpy);
 	if (!find)
-		ft_map_error(&glo->garb.gbgroup, 6);
+		ft_parsing_map_error(&glo->garb.gbgroup, 6);
 	if (debug)
 		write(1, "  -path to exit : ok\n", 21);
 }

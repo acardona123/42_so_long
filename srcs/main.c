@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:00:17 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 16:08:36 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:00:29 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int	main(void)
 {
 	t_global	glob;
 
-	ft_init_main_init_pre_parsing(&glob, 0);
+	ft_init_pre_parsing_main(&glob, 0);
 	return (0);
 }

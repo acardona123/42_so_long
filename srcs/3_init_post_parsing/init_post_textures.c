@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_textures.c                                    :+:      :+:    :+:   */
+/*   init_post_textures.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:16:13 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 02:57:25 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:08:45 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	fts_init_textures_tail_init(t_global glo, t_texture_tail **dst,
 }
 
 /*register all the textures (saved in garbage)*/
-void	ft_init_textures_init(t_global *glo, char debug)
+void	ft_init_post_textures_init(t_global *glo, char debug)
 {
 	if (debug)
 		write(1, "=> textures init :\n", 19);

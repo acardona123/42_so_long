@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:48:39 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 20:20:20 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:30:01 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	fts_check_line(char *line, char border, char contain[3], int map_w)
 {
 	int	x;
 
-	if (ft_strlen((const char *)line) != map_w)
+	if ((int)ft_strlen((const char *)line) != map_w)
 		return (1);
 	x = -1;
 	while (line[++x])
@@ -42,13 +42,13 @@ static int	fts_check_line(char *line, char border, char contain[3], int map_w)
 	return (0);
 }
 
-void	ft_parse_check_map_content(t_global *glo, char **map, char debug)
+void	ft_parsing_check_map_content(t_global *glo, char **map, char debug)
 {
 	char	*contain;
 	int		y;
 	int		error;
 
-	glo->map_w = ft_strlen((const char *)(*map));
+	glo->map_w = (int)ft_strlen((const char *)(*map));
 	contain = "\0\0\0";
 	error = fts_check_line(map[glo->map_h - 1], 1, contain, glo->map_w);
 	y = glo->map_h - 2;
@@ -61,7 +61,7 @@ void	ft_parse_check_map_content(t_global *glo, char **map, char debug)
 		error = fts_check_line(*map, 1, contain, glo->map_w);
 	if (!error && (!contain[0] || !contain[1] || !contain[2]))
 		error = 5;
-	ft_map_error(&glo->garb.gbgroup, error);
+	ft_parsing_map_error(&glo->garb.gbgroup, error);
 	if (debug)
 		write(1, "  -map content : ok\n", 21);
 }

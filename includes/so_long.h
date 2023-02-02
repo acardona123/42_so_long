@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 20:49:00 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:38:14 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_global
 	t_texture_pack		*textures;
 	t_frames			*frames;
 	int					move_cpt;
-	char 				**map;
+	char				**map;
 	int					map_h;
 	int					map_w;
 	int					chunk_size;
@@ -80,44 +80,48 @@ typedef struct s_global
 
 /* 
 
-===== GARBAGE =====
+===== 0_GARBAGE =====
 voir garbage.h; 
  garbage_collector_init.c */
 void		ft_garbage_collector_init(t_global *glo, char debug);
 /*
 
-===== INIT =====
- init_main_init_pre_parsing.c */
-void		ft_init_main_init_pre_parsing(t_global *glo, char debug);
-/*
- init_main_init_post_parsing.c */
-void		ft_init_main_init_post_parsing(t_global *glo, char debug);
-/*
- init_textures.c*/
-void		ft_init_textures_init(t_global *glo, char debug);
+===== 1_INIT PRE PARSING=====
+ init_pre_0main.c */
+void		ft_init_pre_parsing_main(t_global *glo, char debug);
 /*
 
-===== PARSING =====
+===== 2_PARSING =====
+ parsing_0main.c */
+void		ft_parsing_map_error(t_garb_list **garb, int error_id);
+void		ft_parsing_main(t_global *glo, char *map_name, char debug);
+/*
  parsing_file_to_map.c */
-void		ft_parse_file_to_map(t_global *glo, int *fd, char **map, char debug);
+void		ft_parsing_file_to_map(t_global *glo, int *fd, char **map,
+				char debug);
 /*
  parsing_map_check_content.c */
-void		ft_parse_check_map_content(t_global *glo, char **map, char debug);
+void		ft_parsing_check_map_content(t_global *glo, char **map, char debug);
 /*
  parsing_map_check_path.c*/
-void		ft_parse_check_map_path(t_global *glo, char **map, char debug);
-/*
- parsing_main.c */
-void		ft_map_error(t_garb_list **garb, int error_id);
-void		ft_parse_main(t_global *glo, char *map_name, char debug);
+void		ft_parsing_check_map_path(t_global *glo, char **map, char debug);
 /*
 
-===== END =====
+===== 3_INIT POST PARSING=====
+init_post_0main.c */
+void		ft_init_post_parsing_main(t_global *glo, char debug);
+/*
+ init_post_textures.c*/
+void		ft_init_post_textures_init(t_global *glo, char debug);
+/*
+
+
+===== 8_END =====
  end_close.c*/
 void		ft_end_close(t_global *glo, char debug);
 /*
 
-===== TOOLS =====
+===== 9_TOOLS =====
  transparency.c*/
 void		ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top);
@@ -128,5 +132,12 @@ void		ft_error_exit(t_garb_list **garb, int error_id, char *error_msg);
 /*
  tools_find_map_elem.c */
 t_coord		ft_tools_find_map_elem(t_global *glo, char **map, char elem);
+/*
+
+===== 10_LIBFT =====
+ voir libft_so_long.h
+
+===== 11_GNL =====
+ voir get_next_line.h */
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_pre_main.c                                    :+:      :+:    :+:   */
+/*   init_pre_0main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:00:04 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 20:10:40 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 21:00:29 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	fts_init_global_reset(t_global *glo, char debug)
 }
 
 /*Initialize the global strucure glo before map parsing ...*/
-void	ft_init_main_init_pre_parsing(t_global *glo, char debug)
+void	ft_init_pre_parsing_main(t_global *glo, char debug)
 {
 	if (debug)
 		write(1, "\n===== Initialisation =====\n", 28);

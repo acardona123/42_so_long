@@ -23,11 +23,11 @@ int	main(void)
 	glo.frames = 0;
 	glo.move_cpt = 0;
 
-	ft_init_main_init_pre_parsing (&glo, 0);
+	ft_init_pre_parsing_main (&glo, 0);
 	glo.map_h = 100; /*3 lignes simulant la reussite du parsing*/
 	glo.map_w = 200;
 	glo.chunk_size = 16;
-	ft_init_main_init_post_parsing(&glo, 0);
+	ft_init_post_parsing_main(&glo, 0);
 
 	test = 2;
 
