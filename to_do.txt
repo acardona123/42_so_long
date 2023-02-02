@@ -1,6 +1,10 @@
+- parsing de la map : 
+verifier chaque etape du parsing (notemment la gestion de close(fd) avec le garbage).
+
+(
 - Ressources :
 	trouver des les textures
 - init/init_hook.c
 	parametrerles hooks de la fenetre
 - s'entrainer a construire des images
-- parsing de la map
+)

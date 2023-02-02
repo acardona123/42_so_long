@@ -1,0 +1,1 @@
+Fonctions utiles a la construction  et manipulation du garbage collector (pour lagestion des leaks).

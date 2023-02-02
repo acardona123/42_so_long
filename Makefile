@@ -20,21 +20,25 @@ SRC_GARBABE		=	$(addprefix 0_garbage_collector/, \
 					garbage_collector_init \
 					garbage_collector_my_malloc \
 					)
-SRC_INIT		=	$(addprefix 1_init/, \
-					init_main_init_pre_parsing \
-					init_main_init_post_parsing \
-					init_textures \
-					init_hooks \
+SRC_INIT_PRE	=	$(addprefix 1_init_pre_parsing/, \
+					init_pre_main \
+					)
+SRC_INIT_POST	=	$(addprefix 3_init_post_parsing/, \
+					init_post_main \
+					init_post_textures \
+					init_post_hooks \
 					)
 SRC_END			=	$(addprefix 8_end/, \
 					end_close \
 					)
 SRC_TOOLS		=	$(addprefix 9_tools/, \
 					transparency \
+					tools_error_exit \
 					)
 SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
 					$(SRC_GARBABE) \
-					$(SRC_INIT) \
+					$(SRC_INIT_PRE) \
+					$(SRC_INIT_POST) \
 					$(SRC_END) \
 					))
 TESTS			=	$(addprefix $(TESTS_DIR), $(addsuffix .c, \

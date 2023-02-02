@@ -1,0 +1,3 @@
+Initialisation du garbage collector etcreation de la t_global contenant la plupart des parametres du projet.
+La creation de ces elements est indispensable au parsing.
+Le parsing (etape suivante) est necessaire avant la  fin de l'initialisation de t_global (besoin notamment de la taille de la map).

@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 21:56:53 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 16:19:32 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:41:01 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_garbage_resume
 	t_garbage		*gbimg;
 	t_garbage		*gbwin;
 	t_garbage		*gbxvar;
+	t_garbage		*gbfd;
 }	t_garbage_resume;
 
 /*
@@ -65,6 +66,7 @@ void			ft_garbage_del_gbptr(t_garb_del_arg *args, void *to_del);
 void			ft_garbage_del_gbxvar(t_garb_del_arg *args, void *to_del);
 void			ft_garbage_del_gbimg(t_garb_del_arg *args, void *to_del);
 void			ft_garbage_del_gbwin(t_garb_del_arg *args, void *to_del);
+void			ft_garbage_del_gbfd(t_garb_del_arg *args, void *to_del);
 /*
  garbage_collector_init.c 
  cf so_long.h*/
@@ -81,23 +83,23 @@ void			*ft_my_malloc(t_garbage *garb, size_t size);
 /*1) include garbage_h*/
 /*2) in garbage_h modify s_garbage_resume :*/
 /*  - you must keep the gbgroup (will list all the garbages) and the garbage */
-/*  gbptr (garbagefor simple pointers to free with free() )*/
+/*  gbptr (garbage for simple pointers to free with free() )*/
 /*  - add one t_garbage* for each different family of malloced pointer */
-/*  (requiering differentfree functions).*/
-/*3) Apply ft_garbage_group_init to this structure element. It will initilise */
-/*  the garbage gbptr presented previously */
+/*  (requiering different free functions).*/
+/*3) Apply ft_garbage_group_init to this s_garbage_resume element. */
+/*  It will initilize the garbage gbptr presented previously */
 /*4) To crate a new garbage family :*/
 /*   (will generate and complete a new t_garbage elem and add it to the*/
 /*   garbagelist in s_garbage_resume)*/
 /*  4.1) build the function used to free an element of the family in */
-/*	 garbage_collector_2_free_ftn, it must be prototyped as following :*/
+/*	 garbage_collector_free_ftn, it must be prototyped as following :*/
 /*           void	ft_del(t_garb_del_arg *del_args, void *ptr_to_del); */
 /*  4.2) Add the prototypes of these functions to this header file*/
 /*	4.3) use ft_garbage_del_arg_init to build args, the structure element */
 /*	     containing the missing parameters for ft_del. */
 /*	4.4) use ft_garbage_special_init with previously builded parameters, */
 /*		 the return correspond to the t_garbage* of this garbage in */
-/*		 t_garbage_resume  
+/*		 t_garbage_resume
 
 */
 /* == USES == */

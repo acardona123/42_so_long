@@ -1,0 +1,1 @@
+Parsing de la carte: verification de sa validite, releve les dimensions de la map et construit le tableau de chaines de caracteres correspondant a la map.

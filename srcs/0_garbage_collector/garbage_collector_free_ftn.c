@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 00:28:00 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 13:35:37 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:35:40 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,11 @@ void	ft_garbage_del_gbimg(t_garb_del_arg *args, void *to_del)
 void	ft_garbage_del_gbwin(t_garb_del_arg *args, void *to_del)
 {
 	mlx_destroy_window(((t_global *)(args->arg1))->mlx, to_del);
+}
+
+/*del for gbfd : to_del points to the fd of an opened file, close it*/
+void	ft_garbage_del_gbfd(t_garb_del_arg *args, void *to_del)
+{
+	close(*(int *)to_del);
+	free(to_del);
 }

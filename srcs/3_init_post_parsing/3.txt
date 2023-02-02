@@ -1,0 +1,1 @@
+Fin d'initialisation du game (creation des differentes images, initialisationdes hooks etc).

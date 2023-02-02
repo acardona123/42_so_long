@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_main_init_post_parsing.c                      :+:      :+:    :+:   */
+/*   init_post_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:53:24 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 15:58:01 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/02 20:11:22 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-/*Initializes mlx and injects it into the global strucure glo*/
+/*Initializes mlx and injects it into the global structure glo*/
 static void	fts_init_xvars_init(t_global *glo, char debug)
 {
 	if (debug)
@@ -39,7 +39,7 @@ static void	fts_init_win_init(t_global *glo, char debug)
 		write(1, " ok\n", 4);
 }
 
-/*initialise 2 img (size of the map) to be canvas tobe displayed on the window*/
+/*initializes 2 img (map size) used later as canvas to displayed on the window*/
 static void	fts_init_frames_init(t_global *glo, char debug)
 {
 	t_frames	*frame1;
@@ -79,5 +79,6 @@ void	ft_init_main_init_post_parsing(t_global *glo, char debug)
 	/*
 	to do : hooks init
 	*/
-	write(1, "- End of initialisation  -\n\n", 28);
+	if (debug)
+		write(1, "- End of initialisation  -\n\n", 28);
 }
