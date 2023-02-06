@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:00:04 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 21:00:29 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:48:59 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,16 @@ static void	fts_init_global_reset(t_global *glo, char debug)
 	glo->garb.gbxvar = 0;
 	glo->mlx = 0;
 	glo->win = 0;
-	glo->textures = 0;
+	glo->textures.exit = 0;
+	glo->textures.fruit = 0;
+	glo->textures.ground = 0;
+	glo->textures.player = 0;
+	glo->textures.ground = 0;
 	glo->frames = 0;
 	glo->move_cpt = 0;
+	glo->map = 0;
+	glo->map_h = 0;
+	glo->map_w = 0;
 }
 
 /*Initialize the global strucure glo before map parsing ...*/

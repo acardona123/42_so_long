@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   tools_img_get_coords.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:53:35 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/03 12:14:20 by acardona         ###   ########.fr       */
+/*   Created: 2023/02/06 02:32:44 by acardona          #+#    #+#             */
+/*   Updated: 2023/02/06 02:42:55 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft_so_long.h"
+#include "../../includes/so_long.h"
 
-void	ft_lstclear(t_list **lst)
+/*Returns the address of a pixel described by its coordonates*/
+char	*ft_tools_get_pxl_addr(t_data *data, int x, int y)
 {
-	t_list	*pelem;
-	t_list	*pnext;
+	char	*rtn;
 
-	if (lst)
+	if (!data || data->bpp == 0 || !data->addr
+		|| data->line_length == 0)
 	{
-		pelem = *lst;
-		while (pelem)
-		{
-			free(pelem->content);
-			pnext = pelem->next;
-			free(pelem);
-			pelem = pnext;
-		}
-		*lst = NULL;
+		write(1, "Error\nIn ft_tools_get_pxl_addr.\n", 32);
+		return (0);
 	}
+	rtn = data->addr + data->line_length * data->bpp / 8 * y
+		+ x * data->bpp / 8;
+	return (rtn);
 }

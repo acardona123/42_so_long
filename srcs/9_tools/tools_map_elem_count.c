@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   tools_map_elem_count.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:53:35 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/03 12:14:20 by acardona         ###   ########.fr       */
+/*   Created: 2023/02/03 13:44:27 by acardona          #+#    #+#             */
+/*   Updated: 2023/02/03 14:22:26 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft_so_long.h"
+#include "../../includes/so_long.h"
 
-void	ft_lstclear(t_list **lst)
+/*Count the number of apparition of the char elem in the map*/
+long int	ft_tools_elem_count(char **map, char elem)
 {
-	t_list	*pelem;
-	t_list	*pnext;
+	int	y;
+	int	x;
+	int	cpt;
 
-	if (lst)
+	if (!map)
+		return (0);
+	cpt = 0;
+	y = -1;
+	while (map[++y])
 	{
-		pelem = *lst;
-		while (pelem)
-		{
-			free(pelem->content);
-			pnext = pelem->next;
-			free(pelem);
-			pelem = pnext;
-		}
-		*lst = NULL;
+		x = -1;
+		while (map[y][++x])
+			if (map[y][x] == elem)
+				cpt++;
 	}
+	return (cpt);
 }

@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transparency.c                                     :+:      :+:    :+:   */
+/*   tools_img_blend.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:50:07 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/21 23:15:50 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/06 02:45:05 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
-
-/*Apply the given color to the pixel (x,y) of an image*/
-void	ft_my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + y * data->line_length + x * (data->bits_per_pixel / 8);
-	*(unsigned int *)dst = color;
-}
+#include "../../includes/so_long.h"
 
 /*modify pxl_dst by supperposing pxl_top to it, deals with transparency.*/
 void	ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top)
@@ -52,8 +43,8 @@ void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
 	int	x;
 	int	y;
 
-	if (back->bits_per_pixel != top->bits_per_pixel
-		|| back->bits_per_pixel != 32)
+	if (back->bpp != top->bpp
+		|| back->bpp != 32)
 		return ;
 	y = -1;
 	while (++y + y0 < ((t_img *)back->img)->height
@@ -64,9 +55,9 @@ void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
 			&& x < ((t_img *)top->img)->width)
 		{
 			ft_blend_pxl((unsigned int *)((back->addr) + (x0 + x)
-					* (back->bits_per_pixel / 8) + (y0 + y)
+					* (back->bpp / 8) + (y0 + y)
 					* (back->line_length)), (unsigned int*)((top->addr) + x
-					* (top->bits_per_pixel / 8) + y * top->line_length));
+					* (top->bpp / 8) + y * top->line_length));
 		}
 	}
 }
@@ -104,7 +95,7 @@ void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
 // 	win = mlx_new_window(mlx, WIDTH, HEIGHT, "Ma fenetre");
 // 	background.img = mlx_new_image(mlx, WIDTH, HEIGHT);
 // 	background.addr = mlx_get_data_addr(background.img,
-// 	&background.bits_per_pixel, &background.line_length, &background.endian);
+// 	&background.bpp, &background.line_length, &background.endian);
 // 	ft_square(&background, 0, 0, 10, 0x00FF0000);
 // 	ft_square(&background, WIDTH - 10, 0, 10, 0x00FF0000);
 // 	ft_square(&background, 0, HEIGHT - 10, 10, 0x00FF0000);
@@ -113,7 +104,7 @@ void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
 // 	mlx_put_image_to_window(mlx, win, background.img, 0, 0);
 // 	sleep(1);
 // 	front1.img = mlx_new_image(mlx, WIDTH / 2, HEIGHT / 2);
-// 	front1.addr = mlx_get_data_addr(front1.img, &front1.bits_per_pixel, &front1.line_length, &front1.endian);
+// 	front1.addr = mlx_get_data_addr(front1.img, &front1.bpp, &front1.line_length, &front1.endian);
 // 	ft_square(&front1, 0, 0, WIDTH / 4, 0x000000FF);
 // 	ft_square(&front1, 0, WIDTH / 4, WIDTH / 4, 0x100000FF);
 // 	ft_square(&front1, WIDTH / 4, 0, WIDTH / 4, 0x600000FF);

@@ -1,10 +1,9 @@
-- parsing de la map : 
-verifier chaque etape du parsing (notemment la gestion de close(fd) avec le garbage).
 
-(
 - Ressources :
-	trouver des les textures
+	faire un test d'implementation d'une img (pour le moment segfault au moemet de put_img_to_window)
+	(meme sans le resize des chunks)
+
+
 - init/init_hook.c
 	parametrerles hooks de la fenetre
 - s'entrainer a construire des images
-)

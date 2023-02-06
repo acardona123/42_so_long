@@ -26,8 +26,8 @@ SRC_1_INIT_PRE	=	$(addprefix 1_init_pre_parsing/, \
 SRC_2_PARSING		=	$(addprefix 2_parsing/, \
 					parsing_0main \
 					parsing_file_to_map \
-					parsing_map_check_content \
-					parsing_map_check_path \
+					parsing_check_map_content \
+					parsing_check_map_path \
 					)
 SRC_3_INIT_POST	=	$(addprefix 3_init_post_parsing/, \
 					init_post_0main \
@@ -39,8 +39,12 @@ SRC_8_END			=	$(addprefix 8_end/, \
 					)
 SRC_9_TOOLS		=	$(addprefix 9_tools/, \
 					tools_error_exit \
-					tools_find_map_elem \
-					tools_transparency \
+					tools_img_blend \
+					tools_img_new_img \
+					tools_img_resize \
+					tools_map_elem_find \
+					tools_map_elem_count \
+					tools_pxl \
 					)
 SRC_10_LIBFT	=	$(addprefix 10_libft/, \
 					ft_lstadd_back \
@@ -55,6 +59,7 @@ SRC_11_GNL		=	$(addprefix 11_gnl/, \
 					get_next_line \
 					get_next_line_utils \
 					)
+
 SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
 					$(SRC_0_GARBABE) \
 					$(SRC_1_INIT_PRE) \
@@ -64,9 +69,10 @@ SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
 					$(SRC_9_TOOLS) \
 					$(SRC_10_LIBFT) \
 					$(SRC_11_GNL) \
+					0main \
 					))
 TESTS			=	$(addprefix $(TESTS_DIR), $(addsuffix .c, \
-					test_garbage_collector \
+					\
 					))
 OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC) $(TESTS))
 

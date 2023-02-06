@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:53:25 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 16:16:14 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/05 22:03:02 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_garbage	*ft_garbage_special_init(t_garbage_resume *garb_lst,
 	{
 		if (garb_lst->gbgroup)
 			ft_garbage_group_free(&(garb_lst->gbgroup), 1);
-		exit(1);
+		exit(ERR_GARB);
 	}
 	garb->parent_group = &(garb_lst->gbgroup);
 	garb->del_function = del_function;
@@ -94,7 +94,7 @@ int	ft_garbage_add(t_garbage *garb, void *ptr)
 	if (!garb)
 	{
 		write(1, "Garbage collector uninitialized. Exit.\n", 39);
-		exit(1);
+		exit(ERR_GARB);
 	}
 	if (!ptr)
 		write(1, "/!\\ Added a NULL pinter to garbage. Normal ?\n", 45);

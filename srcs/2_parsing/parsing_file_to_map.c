@@ -6,41 +6,37 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:24:01 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/02 21:13:10 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/06 01:16:25 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
+#include <stdio.h>
+
 /*transfers the elements of the list to the map (table of strings)*/
-static void	fts_parse_lst_to_tab(t_global *glo, char **map, t_list **lst)
+static void	fts_parse_lst_to_map(t_global *glo, t_list **lst)
 {
 	size_t	i;
 	t_list	*elem;
 	t_list	*tmp;
 
-	map = malloc((glo->map_h) * sizeof(char *) + 1);
-	if (!map)
-	{
-		ft_lstclear(lst);
-		ft_garbage_group_free(&glo->garb.gbgroup, 1);
-	}
-	ft_garbage_add(glo->garb.gbptr, map);
+	glo->map = ft_my_malloc(glo->garb.gbptr, ((glo->map_h) + 1) * sizeof(char *));
 	elem = *lst;
 	i = 0;
 	while (elem)
 	{
-		map[i] = (char *)(elem->content);
-		i++;
+		(glo->map)[i] = elem->content;
 		tmp = elem->next;
-		free(tmp);
+		ft_garbage_free_one(glo->garb.gbptr, elem);
 		elem = tmp;
+		i++;
 	}
-	map[i] = 0;
+	(glo->map)[i] = 0;
 }
 
 /*Convert a mapfile into a string and set the number of lines in glostruct*/
-void	ft_parsing_file_to_map(t_global *glo, int *fd, char **map, char debug)
+void	ft_parsing_file_to_map(t_global *glo, int *fd, char debug)
 {
 	t_list	*lst;
 	t_list	*elem;
@@ -54,15 +50,15 @@ void	ft_parsing_file_to_map(t_global *glo, int *fd, char **map, char debug)
 		elem = ft_lstnew(line);
 		if (!elem)
 		{
-			ft_lstclear(&lst);
 			ft_error_exit(&glo->garb.gbgroup, 1, "Malloc fail.");
 		}
+		ft_garbage_add(glo->garb.gbptr, elem);
 		ft_lstadd_back(&lst, elem);
 		line = get_next_line(*fd);
 	}
 	ft_garbage_free_one(glo->garb.gbfd, fd);
 	glo->map_h = ft_lstsize(lst);
-	fts_parse_lst_to_tab(glo, map, &lst);
+	fts_parse_lst_to_map(glo, &lst);
 	if (debug)
 		write(1, "  -conversion file to map : ok\n", 31);
 }

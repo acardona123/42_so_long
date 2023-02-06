@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   decouverte.c                                       :+:      :+:    :+:   */
+/*   test_decouverte.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:21:11 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/21 23:21:52 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/05 22:35:44 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void ft_disk_shadow(t_data *data, int center_x, int center_y, int radius_min, in
 			{
 				// pxl = 255;
 				// ft_my_mlx_pixel_put(data, x, y, 255);
-				ft_blend_pxl((unsigned int *)(data->addr + x * data->bits_per_pixel / 8 + y * data->line_length), &pxl);
+				ft_blend_pxl((unsigned int *)(data->addr + x * data->bpp / 8 + y * data->line_length), &pxl);
 			}
 			x++;
 		}
@@ -189,7 +189,7 @@ int	main(void)
 	mlx = mlx_init();
 	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world");
 	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
 	ft_circle(&img, 70, 70, 60, 0x00FF0000);
 	ft_square(&img, 70, 70, 70, 0x0000FF00);
 	ft_hexagon(&img, 70, 70, 40, 0x000000FF);
@@ -249,7 +249,7 @@ int	main(void)
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "Hello world");
 	img.img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
+	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
 
 	// ft_circle(&img, 70, 70, 60, 0x00FF0000);

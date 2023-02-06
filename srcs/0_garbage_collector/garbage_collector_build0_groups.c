@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 00:40:14 by acardona          #+#    #+#             */
-/*   Updated: 2023/01/23 16:12:41 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/05 22:02:44 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	ft_garbage_group_init(t_garbage_resume *garb_lst)
 
 	args = malloc (sizeof (t_garb_del_arg));
 	if (!args)
-		exit(1);
+		exit(ERR_GARB);
 	garb_lst->gbptr = malloc(sizeof(t_garbage));
 	if (!garb_lst->gbptr)
 	{
 		free(args);
-		exit(1);
+		exit(ERR_GARB);
 	}
 	args->arg1 = 0;
 	args->arg2 = 0;
