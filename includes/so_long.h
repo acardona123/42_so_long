@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/06 03:23:35 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:58:49 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include "libft_so_long.h"
 # include "get_next_line.h"
 
-# define WIDTH 1024
-# define HEIGHT 1024
-# define CHUNK_SIZE 32
+# define WIDTH 2048
+# define HEIGHT 2048
+# define CHUNK_SIZE 64
 
-# define MAP_NAME "includes/maps/valid/map_valid_7x4_simple.txt"
+# define MAP_NAME "includes/maps/valid/map_valid_20x20.txt"
 # define PATH_EXIT "includes/textures/exit.xpm"
 # define PATH_GROUND "includes/textures/ground.xpm"
 # define PATH_PLAYER "includes/textures/penguin16x16.xpm"
@@ -68,7 +68,7 @@ typedef struct s_texture_pack
 	t_texture_tail	*ground;
 	t_texture_tail	*player;
 	t_texture_tail	*wall;
-	t_texture_tail	*fruit;
+	t_texture_tail	*coll;
 }	t_texture_pack;
 
 typedef struct s_frames
@@ -87,6 +87,7 @@ typedef struct s_global
 	t_frames			*frames;
 	int					move_cpt;
 	char				**map;
+	t_data				*background;
 	int					map_h;
 	int					map_w;
 }	t_global;
@@ -119,12 +120,19 @@ void		ft_parsing_check_map_content(t_global *glo, char debug);
 void		ft_parsing_check_map_path(t_global *glo, char debug);
 /*
 
+
 ===== 3_INIT POST PARSING=====
 init_post_0main.c */
 void		ft_init_post_parsing_main(t_global *glo, char debug);
 /*
+ init_post_hooks.c */
+void		ft_init_post_hooks_init(t_global *glo, char debug);
+/*
  init_post_textures.c*/
 void		ft_init_post_textures_init(t_global *glo, char debug);
+/*
+ init_post_background.c */
+void		ft_init_post_background_init(t_global *glo, char debug);
 /*
 
 
@@ -133,10 +141,12 @@ void		ft_init_post_textures_init(t_global *glo, char debug);
 void		ft_end_close(t_global *glo, char debug);
 /*
 
+
 ===== 9_TOOLS =====
  tools_img_blend.c*/
-void		ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top);
-void		ft_blend_img(t_data *back, t_data *top, int x0, int y0);
+void		ft_tools_pxl_blend_pxl(unsigned int *pxl_dst,
+				unsigned int *pxl_top);
+void		ft_tools_img_blend(t_data *back, t_data *top, int x0, int y0);
 /*
  tools_img_new_img.c*/
 t_data		*ft_tools_img_new(t_global *glo, int width, int height);

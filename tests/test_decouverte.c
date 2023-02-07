@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:21:11 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/05 22:35:44 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/07 02:22:18 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void ft_disk_shadow(t_data *data, int center_x, int center_y, int radius_min, in
 			{
 				// pxl = 255;
 				// ft_my_mlx_pixel_put(data, x, y, 255);
-				ft_blend_pxl((unsigned int *)(data->addr + x * data->bpp / 8 + y * data->line_length), &pxl);
+				ft_tools_pxl_blend_pxl((unsigned int *)(data->addr + x * data->bpp / 8 + y * data->line_length), &pxl);
 			}
 			x++;
 		}
@@ -219,7 +219,6 @@ int	ft_key_hook(int key_code, t_global *param)
 	else if (key_code == XK_Escape)
 	{
 		mlx_destroy_window(param->mlx, param->win);
-		exit (0);
 	}
 	// else//
 	// 	printf("%d\n", key_code);//
@@ -243,25 +242,29 @@ int	ft_expose_hook(void *param)
 
 int	main(void)
 {
-	t_global	vars;
+	t_global	glo;
 	t_data	img;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, WIDTH, HEIGHT, "Hello world");
-	img.img = mlx_new_image(vars.mlx, WIDTH, HEIGHT);
+	glo.mlx = mlx_init();
+	glo.win = mlx_new_window(glo.mlx, WIDTH, HEIGHT, "Hello world");
+	img.img = mlx_new_image(glo.mlx, WIDTH, HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_put_image_to_window(glo.mlx, glo.win, img.img, 0, 0);
 
 	// ft_circle(&img, 70, 70, 60, 0x00FF0000);
 	// ft_square(&img, 70, 70, 70, 0x0000FF00);
 	// ft_hexagon(&img, 70, 70, 40, 0x000000FF);
 	//ft_rainbow(&img, WIDTH / 2, HEIGHT/2, 10, HEIGHT / 2 - 10);
 	ft_square(&img, WIDTH / 2, WIDTH / 2, WIDTH, 0x0000FF00);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_pixel_put(vars.mlx, vars.win, 70, 70, 0xFFFF0000);
+	mlx_put_image_to_window(glo.mlx, glo.win, img.img, 0, 0);
+	mlx_pixel_put(glo.mlx, glo.win, 70, 70, 0xFFFF0000);
 	ft_disk_shadow(&img, WIDTH / 2, WIDTH / 2, 10, WIDTH / 2 - 20);
-	mlx_key_hook(vars.win, &ft_key_hook, &vars); 
-	mlx_mouse_hook(vars.win, &ft_mouse_hook, &vars);
-	mlx_loop(vars.mlx);
+	mlx_key_hook(glo.win, &ft_key_hook, &glo); 
+	mlx_mouse_hook(glo.win, &ft_mouse_hook, &glo);
+	//mlx_loop(glo.mlx);
+	mlx_destroy_window(glo.mlx, glo.win);
+	mlx_destroy_image(glo.mlx, img.img);
+	mlx_destroy_display(glo.mlx);
+	free(glo.mlx);
 	return (0);
 }

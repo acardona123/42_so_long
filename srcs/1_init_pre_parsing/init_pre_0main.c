@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:00:04 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/06 01:48:59 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/07 01:13:50 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	fts_init_global_reset(t_global *glo, char debug)
 	glo->mlx = 0;
 	glo->win = 0;
 	glo->textures.exit = 0;
-	glo->textures.fruit = 0;
+	glo->textures.coll = 0;
 	glo->textures.ground = 0;
 	glo->textures.player = 0;
 	glo->textures.ground = 0;

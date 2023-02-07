@@ -1,9 +1,5 @@
-
-- Ressources :
-	faire un test d'implementation d'une img (pour le moment segfault au moemet de put_img_to_window)
-	(meme sans le resize des chunks)
-
+TROUVER COMMENT SORTIR PROPREMENT DE LA LOOP SANS AVOIR DE SEG FAULT
+il semblerait que, dans mon cas, quitter en utilisant la destruction de la fenetre soit la cause du seg fault. Pourtant dans mes tests dans le main0.c je fais la meme chose avec la fonction test et il n'y a aucun pb...
 
 - init/init_hook.c
 	parametrerles hooks de la fenetre
-- s'entrainer a construire des images

@@ -6,14 +6,14 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:50:07 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/06 02:45:05 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/07 01:31:11 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
 /*modify pxl_dst by supperposing pxl_top to it, deals with transparency.*/
-void	ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top)
+void	ft_tools_pxl_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top)
 {
 	int				pxl;
 	unsigned char	tr;
@@ -38,7 +38,7 @@ void	ft_blend_pxl(unsigned int *pxl_dst, unsigned int *pxl_top)
 }
 
 /*Mofiy back img puting top img at x0,y0 & mixing colors if transparency*/
-void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
+void	ft_tools_img_blend(t_data *back, t_data *top, int x0, int y0)
 {
 	int	x;
 	int	y;
@@ -54,7 +54,7 @@ void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
 		while (++x + x0 < ((t_img *)back->img)->width
 			&& x < ((t_img *)top->img)->width)
 		{
-			ft_blend_pxl((unsigned int *)((back->addr) + (x0 + x)
+			ft_tools_pxl_blend_pxl((unsigned int *)((back->addr) + (x0 + x)
 					* (back->bpp / 8) + (y0 + y)
 					* (back->line_length)), (unsigned int*)((top->addr) + x
 					* (top->bpp / 8) + y * top->line_length));
@@ -110,7 +110,7 @@ void	ft_blend_img(t_data *back, t_data *top, int x0, int y0)
 // 	ft_square(&front1, WIDTH / 4, 0, WIDTH / 4, 0x600000FF);
 // 	ft_square(&front1, WIDTH / 4, WIDTH / 4, WIDTH / 4, 0xFF0000FF);
 // 	// mlx_put_image_to_window(mlx, win, front1.img, 0, 0);
-// 	ft_blend_img(&background, &front1, 10, 10);
+// 	ft_tools_img_blend(&background, &front1, 10, 10);
 // 	printf("Toto\n");
 // 	mlx_put_image_to_window(mlx, win, background.img, 0, 0);
 // 	mlx_loop(mlx);

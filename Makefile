@@ -33,6 +33,7 @@ SRC_3_INIT_POST	=	$(addprefix 3_init_post_parsing/, \
 					init_post_0main \
 					init_post_textures \
 					init_post_hooks \
+					init_post_background \
 					)
 SRC_8_END			=	$(addprefix 8_end/, \
 					end_close \
@@ -97,4 +98,10 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all clean fclean re bonus
+run : all
+	./$(NAME)
+
+check : all
+	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes ./$(NAME)
+
+.PHONY : all clean fclean re bonus check
