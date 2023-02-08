@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 21:56:53 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/05 22:01:21 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 01:35:47 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define GARBAGE_H
 # include <stdlib.h>
 # define ERR_GARB 2
+# ifndef DEBUG
+#  define DEBUG 0
+# endif
 
 typedef struct s_garb_list
 {

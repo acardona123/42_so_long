@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:24:01 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/06 01:16:25 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:25:23 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	fts_parse_lst_to_map(t_global *glo, t_list **lst)
 }
 
 /*Convert a mapfile into a string and set the number of lines in glostruct*/
-void	ft_parsing_file_to_map(t_global *glo, int *fd, char debug)
+void	ft_parsing_file_to_map(t_global *glo, int *fd)
 {
 	t_list	*lst;
 	t_list	*elem;
@@ -47,7 +47,7 @@ void	ft_parsing_file_to_map(t_global *glo, int *fd, char debug)
 	while (line)
 	{
 		ft_garbage_add(glo->garb.gbptr, line);
-		elem = ft_lstnew(line);
+		elem = ft_lstnew_no_garbage(line);
 		if (!elem)
 		{
 			ft_error_exit(&glo->garb.gbgroup, 1, "Malloc fail.");
@@ -59,6 +59,6 @@ void	ft_parsing_file_to_map(t_global *glo, int *fd, char debug)
 	ft_garbage_free_one(glo->garb.gbfd, fd);
 	glo->map_h = ft_lstsize(lst);
 	fts_parse_lst_to_map(glo, &lst);
-	if (debug)
+	if (DEBUG)
 		write(1, "  -conversion file to map : ok\n", 31);
 }

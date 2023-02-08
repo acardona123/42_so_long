@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 18:54:18 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/03 14:31:57 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 01:38:54 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	fts_parsing_map_free(t_global *glo, char **map, int map_h)
 }
 
 /*On a content-verified map : check if a path exist between P and E*/
-void	ft_parsing_check_map_path(t_global *glo, char debug)
+void	ft_parsing_check_map_path(t_global *glo)
 {
 	t_coord		start;
 	char		**map_cpy;
@@ -74,6 +74,6 @@ void	ft_parsing_check_map_path(t_global *glo, char debug)
 	fts_parsing_map_free(glo, map_cpy, glo->map_h);
 	if (*sum != 1 || sum[1] != ft_tools_elem_count(glo->map, 'C'))
 		ft_parsing_map_error(&glo->garb.gbgroup, 6);
-	if (debug)
+	if (DEBUG)
 		write(1, "  -valid path : ok\n", 19);
 }

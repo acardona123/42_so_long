@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 00:21:11 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/07 02:22:18 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 02:55:02 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ void ft_square(t_data *data, int x_square, int y_square, int size, int color)
 	int	y;
 
 	x = (x_square - size / 2) * ((x_square - size / 2) >= 0);
-	while (x < WIDTH && x < x_square + size / 2)
+	while (x < WIN_WIDTH && x < x_square + size / 2)
 	{
 		y = (y_square - size / 2) * ((y_square - size / 2) >= 0);;
-		while (y < HEIGHT && y < y_square + size / 2)
+		while (y < WIN_HEIGHT && y < y_square + size / 2)
 		{
 			ft_my_mlx_pixel_put(data, x, y, color);
 			y++;
@@ -41,8 +41,8 @@ void ft_circle(t_data *data, int center_x, int center_y, int radius, int color)
 	int	y0;
 	int	y;
 
-	if (radius <= 0 || center_x + radius < 0 || center_x - radius > WIDTH
-		|| center_y + radius < 0 || center_y - radius > HEIGHT)
+	if (radius <= 0 || center_x + radius < 0 || center_x - radius > WIN_WIDTH
+		|| center_y + radius < 0 || center_y - radius > WIN_HEIGHT)
 		return ;
 	if (center_x - radius >= 1)
 		x = center_x - radius - 1;
@@ -52,10 +52,10 @@ void ft_circle(t_data *data, int center_x, int center_y, int radius, int color)
 		y0 = center_y - radius - 1;
 	else
 		y0 = 0;
-	while (x <= WIDTH && x <= center_x + radius + 1)
+	while (x <= WIN_WIDTH && x <= center_x + radius + 1)
 	{
 		y = y0;
-		while (y <= HEIGHT && y <= center_y + radius + 1)
+		while (y <= WIN_HEIGHT && y <= center_y + radius + 1)
 		{
 			if ((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y) <= radius * radius)
 				ft_my_mlx_pixel_put(data, x, y, color);
@@ -77,10 +77,10 @@ void ft_hexagon(t_data *data, int x_hex, int y_hex, int	size, int color)
 	int	y;
 
 	x = x_hex - size / 2;
-	while (x < WIDTH && x < x_hex + size / 2 + size % 2)
+	while (x < WIN_WIDTH && x < x_hex + size / 2 + size % 2)
 	{
 		y = y_hex - size / 2;
-		while (y < HEIGHT && y < y_hex + size / 2 + size % 2)
+		while (y < WIN_HEIGHT && y < y_hex + size / 2 + size % 2)
 		{
 			if (ft_abs(x - x_hex) + ft_abs(y - y_hex) <= 3 * size / 4
 				&& ft_abs(x - x_hex) <= size / 2 && ft_abs(y - y_hex) <= size / 2)
@@ -98,8 +98,8 @@ void	ft_rainbow(t_data *data, int center_x, int center_y, int radius_min, int ra
 	int	r;
 	int	color;
 
-	if (radius_max <= radius_min || radius_min < 0 || center_x + radius_max < 0 || center_x - radius_max > WIDTH
-		|| center_y < 0 || center_y - radius_max > HEIGHT)
+	if (radius_max <= radius_min || radius_min < 0 || center_x + radius_max < 0 || center_x - radius_max > WIN_WIDTH
+		|| center_y < 0 || center_y - radius_max > WIN_HEIGHT)
 		return ;
 	if (center_x > radius_max)
 		x = center_x - radius_max - 1;
@@ -109,10 +109,10 @@ void	ft_rainbow(t_data *data, int center_x, int center_y, int radius_min, int ra
 		y0 = center_y - radius_max - 1;
 	else
 		y0 = 0;
-	while (x <= WIDTH && x <= center_x)
+	while (x <= WIN_WIDTH && x <= center_x)
 	{
 		y = y0;
-		while (y <= HEIGHT && y <= center_y)
+		while (y <= WIN_HEIGHT && y <= center_y)
 		{
 			r = sqrt((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y));
 			if (r <= radius_min + (radius_max - radius_min) / 2  + (radius_max - radius_min) % 2 && r >= radius_min)
@@ -147,10 +147,10 @@ void ft_disk_shadow(t_data *data, int center_x, int center_y, int radius_min, in
 	unsigned int	pxl;
 
 	y = center_y - radius_max;
-	while (y < HEIGHT && y <= center_y + radius_max)
+	while (y < WIN_HEIGHT && y <= center_y + radius_max)
 	{
 		x = center_x - radius_max;
-		while (x < WIDTH && x <= center_x + radius_max)
+		while (x < WIN_WIDTH && x <= center_x + radius_max)
 		{
 			r = (int)sqrt((x - center_x) * (x - center_x) + (y - center_y) * (y - center_y));//((r - radius_min) * 255 / (radius_max - radius_min)) << 24
 			
@@ -187,13 +187,13 @@ int	main(void)
 	t_data	img;
 
 	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, WIDTH, HEIGHT, "Hello world");
-	img.img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	mlx_win = mlx_new_window(mlx, WIN_WIDTH, WIN_HEIGHT, "Hello world");
+	img.img = mlx_new_image(mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
 	ft_circle(&img, 70, 70, 60, 0x00FF0000);
 	ft_square(&img, 70, 70, 70, 0x0000FF00);
 	ft_hexagon(&img, 70, 70, 40, 0x000000FF);
-	ft_rainbow(&img, WIDTH / 2, HEIGHT/2, 50, HEIGHT / 2 - 10);
+	ft_rainbow(&img, WIN_WIDTH / 2, WIN_HEIGHT/2, 50, WIN_HEIGHT / 2 - 10);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_pixel_put(mlx, mlx_win, 70, 70, 0xFFFF0000);
 	mlx_loop(mlx);
@@ -246,19 +246,19 @@ int	main(void)
 	t_data	img;
 
 	glo.mlx = mlx_init();
-	glo.win = mlx_new_window(glo.mlx, WIDTH, HEIGHT, "Hello world");
-	img.img = mlx_new_image(glo.mlx, WIDTH, HEIGHT);
+	glo.win = mlx_new_window(glo.mlx, WIN_WIDTH, WIN_HEIGHT, "Hello world");
+	img.img = mlx_new_image(glo.mlx, WIN_WIDTH, WIN_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bpp, &img.line_length, &img.endian);
 	mlx_put_image_to_window(glo.mlx, glo.win, img.img, 0, 0);
 
 	// ft_circle(&img, 70, 70, 60, 0x00FF0000);
 	// ft_square(&img, 70, 70, 70, 0x0000FF00);
 	// ft_hexagon(&img, 70, 70, 40, 0x000000FF);
-	//ft_rainbow(&img, WIDTH / 2, HEIGHT/2, 10, HEIGHT / 2 - 10);
-	ft_square(&img, WIDTH / 2, WIDTH / 2, WIDTH, 0x0000FF00);
+	//ft_rainbow(&img, WIN_WIDTH / 2, WIN_HEIGHT/2, 10, WIN_HEIGHT / 2 - 10);
+	ft_square(&img, WIN_WIDTH / 2, WIN_WIDTH / 2, WIN_WIDTH, 0x0000FF00);
 	mlx_put_image_to_window(glo.mlx, glo.win, img.img, 0, 0);
 	mlx_pixel_put(glo.mlx, glo.win, 70, 70, 0xFFFF0000);
-	ft_disk_shadow(&img, WIDTH / 2, WIDTH / 2, 10, WIDTH / 2 - 20);
+	ft_disk_shadow(&img, WIN_WIDTH / 2, WIN_WIDTH / 2, 10, WIN_WIDTH / 2 - 20);
 	mlx_key_hook(glo.win, &ft_key_hook, &glo); 
 	mlx_mouse_hook(glo.win, &ft_mouse_hook, &glo);
 	//mlx_loop(glo.mlx);

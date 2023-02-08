@@ -43,13 +43,17 @@ SRC_9_TOOLS		=	$(addprefix 9_tools/, \
 					tools_img_blend \
 					tools_img_new_img \
 					tools_img_resize \
+					tools_img_sub_cpy \
 					tools_map_elem_find \
 					tools_map_elem_count \
+					tools_map_texture_select \
 					tools_pxl \
 					)
 SRC_10_LIBFT	=	$(addprefix 10_libft/, \
+					ft_itoa_nl \
 					ft_lstadd_back \
 					ft_lstclear \
+					ft_lstnew_no_garbage \
 					ft_lstnew \
 					ft_lstsize \
 					ft_strjoin \

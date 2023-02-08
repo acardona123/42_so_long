@@ -21,7 +21,7 @@ int	main(void)
 	glo.win = 0;
 	glo.textures = 0;
 	glo.frames = 0;
-	glo.move_cpt = 0;
+	glo.cpt_move = 0;
 
 	ft_init_pre_parsing_main (&glo, 0);
 	glo.map_h = 100; /*3 lignes simulant la reussite du parsing*/

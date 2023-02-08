@@ -6,21 +6,19 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:34:24 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/01 22:07:31 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 03:36:44 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/libft_so_long.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(t_garbage *gbptr, char const *s1, char const *s2)
 {
 	char	*s3;
 	size_t	ltot;
 
 	ltot = ft_strlen(s1) + ft_strlen(s2);
-	s3 = malloc((ltot + 1) * sizeof(char));
-	if (!s3)
-		return (NULL);
+	s3 = ft_my_malloc(gbptr, (ltot + 1) * sizeof(char));
 	ft_strlcpy(s3, s1, ft_strlen(s1) + 1);
 	ft_strlcpy(s3 + ft_strlen(s1), s2, ft_strlen(s2) + 1);
 	return (s3);

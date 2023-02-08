@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:16:13 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/07 01:13:50 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 02:17:06 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,19 @@ static int	fts_init_textures_tail_init(t_global *glo, t_texture_tail **dst,
 }
 
 /*register all the textures (saved in garbage)*/
-void	ft_init_post_textures_init(t_global *glo, char debug)
+void	ft_init_post_textures_init(t_global *glo)
 {
-	if (debug)
+	if (DEBUG)
 		write(1, "=> textures init :\n", 19);
-	fts_init_textures_tail_init(glo, &(glo->textures.exit), PATH_EXIT);
+	fts_init_textures_tail_init(glo, &(glo->textures.exit_lock),
+		PATH_EXIT_LOCK);
+	fts_init_textures_tail_init(glo, &(glo->textures.exit_open),
+		PATH_EXIT_OPEN);
 	fts_init_textures_tail_init(glo, &(glo->textures.ground), PATH_GROUND);
 	fts_init_textures_tail_init(glo, &(glo->textures.player), PATH_PLAYER);
 	fts_init_textures_tail_init(glo, &(glo->textures.wall), PATH_WALL);
-	fts_init_textures_tail_init(glo, &(glo->textures.coll), PATH_COLLECT);
-	if (debug)
+	fts_init_textures_tail_init(glo, &(glo->textures.col_on), PATH_COL_ON);
+	fts_init_textures_tail_init(glo, &(glo->textures.col_off), PATH_COL_OFF);
+	if (DEBUG)
 		write(1, " ok\n", 4);
 }

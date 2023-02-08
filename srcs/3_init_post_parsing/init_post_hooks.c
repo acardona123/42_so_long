@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:52:30 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/07 03:05:04 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 01:38:54 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static int	fts_key_hook(int key_code, t_global *glo)
 	return (0);
 }
 
-void	ft_init_post_hooks_init(t_global *glo, char debug)
+void	ft_init_post_hooks_init(t_global *glo)
 {
-	if (debug)
+	if (DEBUG)
 		write(1, "=> frames init :\n", 17);
 	mlx_key_hook(glo->win, &fts_key_hook, &glo); 
 	//mlx_mouse_hook(glo->win, &fts_mouse_hook, &glo);
-	if (debug)
+	if (DEBUG)
 		write(1, " ok\n", 4);
 }

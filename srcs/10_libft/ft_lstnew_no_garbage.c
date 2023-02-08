@@ -12,11 +12,13 @@
 
 #include "../../includes/libft_so_long.h"
 
-t_list	*ft_lstnew(t_garbage *gbptr, void *content)
+t_list	*ft_lstnew_no_garbage(void *content)
 {
 	t_list	*new;
 
-	new = ft_my_malloc(gbptr, sizeof(t_list));
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
 	new->content = content;
 	new->next = NULL;
 	return (new);
