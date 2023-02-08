@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 02:55:02 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 23:09:08 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,10 @@
 
 # define ERR_MLX 3
 
+# define SPEED_RATIO 1
+# define MAX_CAM_SPEED 5
 
 #include <stdio.h>
-
-
-typedef enum e_dir
-{
-	right,
-	up,
-	left,
-	down
-}	t_dir;
 
 typedef struct s_coord
 {
@@ -107,6 +100,13 @@ typedef struct s_global
 	int					cpt_col;
 	int					cpt_move;
 	int					exit_open;
+	int					cam_movable_x;
+	int					cam_movable_y;
+	int					cam_min_w;
+	int					cam_min_h;
+	int					cam_lock;
+	t_coord				cam_co;
+	int					cam_speed;
 }	t_global;
 
 typedef struct s_img_cpy
@@ -163,6 +163,22 @@ void		ft_init_post_background_init(t_global *glo);
 /*
 
 
+===== 4_GAMEPLAY =====
+ gameplay_player_move.c */
+int			ft_game_player_move(t_global *glo, int step, t_coord dir);
+/*
+ gameplay_cam_move.c */
+void		ft_game_cam_reset(t_global *glo);
+void		ft_game_cam_move(t_global *glo, int step, t_coord dir);
+/*
+ gameplay_display.c */
+void		ft_game_display(t_global *glo);
+/*
+ gameplay_open_exit.c */
+void		fts_game_open_exit(t_global *glo);
+/*
+
+
 ===== 8_END =====
  end_close.c*/
 void		ft_end_close(t_global *glo);
@@ -187,6 +203,10 @@ void		ft_tools_img_sub_cpy(t_img_cpy cpy);
 /*
  tools_error_exit.c*/
 void		ft_error_exit(t_garb_list **garb, int error_id, char *error_msg);
+/*
+ tools_extremum_int.c */
+int			ft_tools_min_int(int n1, int n2);
+int			ft_tools_max_int(int n1, int n2);
 /*
  tools_find_map_elem.c */
 void		ft_tools_elem_find(t_global *glo, char **map, char elem,

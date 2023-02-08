@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:53:24 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 02:55:02 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 22:33:03 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,46 @@ static void	fts_init_post_frames_init(t_global *glo)
 			glo->map_h * CHUNK_SIZE);
 	frame1->next = frame2;
 	frame1->next = frame1;
+	ft_tools_elem_find(glo, glo->map, 'P', &frame1->co_player);
 	glo->frames = frame1;
+	glo->cam_co.x = frame1->co_player.x - WIN_WIDTH / 2;
+	glo->cam_co.y = frame1->co_player.y - WIN_HEIGHT / 2;
 	if (DEBUG)
 		write(1, " ok\n", 4);
 }
 
-
+/*Init of the cam pos, window centered on player.*/
+static void	fts_init_post_camera_init(t_global *glo)
+{
+	if (DEBUG)
+		write(1, "=> camera init :\n", 17);
+	glo->cam_lock = 1;
+	glo->cam_co = (t_coord){0, 0};
+	glo->cam_speed = 1;
+	if (glo->map_w * CHUNK_SIZE <= WIN_WIDTH)
+	{
+		glo->cam_movable_x = 0;
+		glo->cam_min_w = WIN_WIDTH / 2 - glo->map_w * CHUNK_SIZE / 2;
+	}
+	else
+	{
+		glo->cam_movable_x = 1;
+		glo->cam_min_w = WIN_WIDTH - glo->map_w * CHUNK_SIZE;
+	}
+	if (glo->map_h * CHUNK_SIZE <= WIN_WIDTH)
+	{
+		glo->cam_movable_y = 0;
+		glo->cam_min_h = WIN_HEIGHT / 2 - glo->map_w * CHUNK_SIZE / 2;
+	}
+	else
+	{
+		glo->cam_movable_y = 1;
+		glo->cam_min_h = WIN_HEIGHT - glo->map_h * CHUNK_SIZE;
+	}
+	ft_game_cam_reset(glo);
+	if (DEBUG)
+		write(1, " ok\n", 4);
+}
 
 /*Finish initialization of global structure after parsing(need map dimensions)*/
 void	ft_init_post_parsing_main(t_global *glo)
@@ -74,6 +108,7 @@ void	ft_init_post_parsing_main(t_global *glo)
 	fts_init_post_win_init(glo);
 	ft_init_post_textures_init(glo);
 	fts_init_post_frames_init(glo);
+	fts_init_post_camera_init(glo);
 	ft_init_post_hooks_init(glo);
 	ft_init_post_background_init(glo);
 	if (DEBUG)

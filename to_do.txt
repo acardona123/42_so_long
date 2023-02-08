@@ -1,5 +1,5 @@
-TROUVER COMMENT SORTIR PROPREMENT DE LA LOOP SANS AVOIR DE SEG FAULT
-il semblerait que, dans mon cas, quitter en utilisant la destruction de la fenetre soit la cause du seg fault. Pourtant dans mes tests dans le main0.c je fais la meme chose avec la fonction test et il n'y a aucun pb...
+lancer make our voir ce qui bug.
+
 
 -gameplay_display:
 faire des tests et completer la fonction ft_game_display.
@@ -10,7 +10,27 @@ faire des tests et completer la fonction ft_game_display.
 
 
 - init/init_hook.c
-	parametrerles hooks de la fenetre
+	verifier les hooks de la fenetre
 
 - end_close:
 	fonction victory a faire.
+
+
+CONTROLS :
+
+- Player :
+w player up
+s player down
+a player left
+d player right
+
+- Camera :
+8 cam up
+5 cam down
+4 cam left
+6 cam right
+[end] cam lock/unlock
+[HOME] cam center to player
+- cam speed reduce
++ cam speed increase
+

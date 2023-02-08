@@ -1,7 +1,7 @@
 NAME			=	so_long
 
 CC				=	cc
-C_FLAGS			=	-Wall -Wextra -Werror
+C_FLAGS			=	-Wall -Wextra #-Werror
 C_FLAGS_DEBUG	=	-g
 
 INCLUDES_DIR	=	includes/
@@ -35,11 +35,18 @@ SRC_3_INIT_POST	=	$(addprefix 3_init_post_parsing/, \
 					init_post_hooks \
 					init_post_background \
 					)
+SRC_4_GAMEPLAY	=	$(addprefix 4_gameplay/, \
+					gameplay_cam_move \
+					gameplay_display \
+					gameplay_open_exit \
+					gameplay_player_move \
+					)
 SRC_8_END			=	$(addprefix 8_end/, \
 					end_close \
 					)
 SRC_9_TOOLS		=	$(addprefix 9_tools/, \
 					tools_error_exit \
+					tools_extremum_int \
 					tools_img_blend \
 					tools_img_new_img \
 					tools_img_resize \
@@ -70,6 +77,7 @@ SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
 					$(SRC_1_INIT_PRE) \
 					$(SRC_2_PARSING) \
 					$(SRC_3_INIT_POST) \
+					$(SRC_4_GAMEPLAY) \
 					$(SRC_8_END) \
 					$(SRC_9_TOOLS) \
 					$(SRC_10_LIBFT) \

@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 02:30:38 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 03:52:43 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 23:10:56 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,8 @@
 /*Determine if,  for a player position given, the map will fillthe screen */
 static int	ft_gameplay_win_full(t_global *glo)
 {
-	if (glo->frames->co_player.x * 2 < WIN_WIDTH
-		|| glo->map_w * CHUNK_SIZE - glo->frames->co_player.x * 2 < WIN_WIDTH
-		|| glo->frames->co_player.y * 2 < WIN_HEIGHT
-		|| glo->map_h * CHUNK_SIZE - glo->frames->co_player.y * 2 < WIN_HEIGHT)
-		return (0);
+	(void)glo;
+	/*to do mais vraiment necessaire que si map plus petite que fenetre, dans ce ca on pourrait fixer la map et bouger le player*/
 	return (1);
 }
 
@@ -31,7 +28,12 @@ static void	fts_display_stat(t_global	*glo)
 	char	*str3;
 
 	str1 = ft_itoa_nl(glo->garb.gbptr, glo->cpt_move);
-	str3 = ft_strjoin(glo->garb.gbptr, "Mouvement count : ", str1);
+	if (glo->cam_lock)
+		str3 = ft_strjoin(glo->garb.gbptr, "Camera locked\nMouvement count : ",
+				str1);
+	else
+		str3 = ft_strjoin(glo->garb.gbptr,
+				"Camera unlocked\nMouvement count : ", str1);
 	ft_garbage_free_one(glo->garb.gbptr, str1);
 	if (glo->cpt_col)
 	{
@@ -53,9 +55,12 @@ static void	fts_display_stat(t_global	*glo)
 
 void	ft_game_display(t_global *glo)
 {
-	if (!ft_gameplay_win_full(glo))
+	ft_gameplay_win_full(glo);
+	if (0)//!ft_gameplay_win_full(glo)
 		mlx_clear_window(glo->mlx, glo->win);
-
+	mlx_put_image_to_window(glo->mlx, glo->win, glo->frames->frame->img,
+		glo->cam_co.x, glo->cam_co.y);
+		fts_display_stat(glo);
 	/*To do*/
 
 	

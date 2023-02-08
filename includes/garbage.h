@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 21:56:53 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 01:35:47 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 18:45:49 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_garb_del_arg
 typedef struct s_garbage
 {
 	t_garb_list		**parent_group;
-	void			(*del_function)(t_garb_del_arg *, void *to_free);
+	void			(*del_function)(t_garb_del_arg *arg, void *to_free);
 	t_garb_del_arg	*del_arg;
 	t_garb_list		*first;
 }	t_garbage;

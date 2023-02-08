@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 03:02:07 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 01:43:58 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:52:16 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_end_close(t_global *glo)
 	if (DEBUG)
 		write(1, " ok\n", 4);
 	write(1, "\nThank you for playing, see you soon.\n\n", 39);
+	exit (0);
 }
 
 /*Dispay a victory msg and wait to close the program*/

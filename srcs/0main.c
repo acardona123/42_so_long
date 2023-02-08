@@ -6,23 +6,11 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 19:00:17 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 01:37:42 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/08 21:45:50 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
-
-void	test(t_global *glo)
-{
-	write(1, "Closing game :\n", 15);
-	printf("win p : %p\n", glo->win);//
-	ft_garbage_free_one(glo->garb.gbwin, glo->win);//seg fault ici
-	write(1, "ok\n", 3);//
-	ft_garbage_group_free(&(glo->garb.gbgroup), 0);
-	printf("Tout va bien\n");
-	exit(0);
-}
-
 
 int	main(void)
 {
@@ -42,6 +30,5 @@ int	main(void)
 	
 	mlx_loop(glo.mlx);
 	//test(&glo);
-	
 	return (0);
 }
