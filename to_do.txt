@@ -1,19 +1,12 @@
-lancer make our voir ce qui bug.
 
 
--gameplay_display:
-faire des tests et completer la fonction ft_game_display.
-
--gameplay :
+-gameplay si mouvement fluide :
  -faire les fonctions permettant de verifier si collision du joueur avec un autre elem (gameplay_move.c)
- -
 
+-cam :
+voir pk la vitesse variable de la camera ne fonctionne pas
 
-- init/init_hook.c
-	verifier les hooks de la fenetre
-
-- end_close:
-	fonction victory a faire.
+- bonus a gerer
 
 
 CONTROLS :
@@ -29,7 +22,7 @@ d player right
 5 cam down
 4 cam left
 6 cam right
-[end] cam lock/unlock
+[c] cam lock/unlock
 [HOME] cam center to player
 - cam speed reduce
 + cam speed increase
