@@ -1,12 +1,13 @@
 NAME			=	so_long
 
 CC				=	cc
-C_FLAGS			=	-Wall -Wextra #-Werror
+C_FLAGS			=	-Wall -Wextra -Werror
 C_FLAGS_DEBUG	=	-g
 
 INCLUDES_DIR	=	includes/
 SRC_DIR			=	srcs/
 OBJ_DIR			=	obj/
+OBJ_DIR_BONUS	=	bonus_obj/
 TESTS_DIR		=	tests/
 LIB_PERSO		=	
 LIBS			=	-L$(INCLUDES_DIR)mlx -lmlx -lXext -lX11 -lm $(LIB_PERSO)
@@ -25,14 +26,16 @@ SRC_1_INIT_PRE	=	$(addprefix 1_init_pre_parsing/, \
 					)
 SRC_2_PARSING		=	$(addprefix 2_parsing/, \
 					parsing_0main \
-					parsing_file_to_map \
 					parsing_check_map_content \
+					parsing_check_map_name \
 					parsing_check_map_path \
+					parsing_file_to_map \
 					)
 SRC_3_INIT_POST	=	$(addprefix 3_init_post_parsing/, \
 					init_post_0main \
 					init_post_textures \
-					init_post_hooks \
+					init_post_hooks_keys \
+					init_post_hooks_main \
 					init_post_background \
 					)
 SRC_4_GAMEPLAY	=	$(addprefix 4_gameplay/, \
@@ -49,8 +52,10 @@ SRC_9_TOOLS		=	$(addprefix 9_tools/, \
 					tools_extremum_int \
 					tools_img_blend \
 					tools_img_cpy \
+					tools_img_draw_rec \
 					tools_img_new_img \
 					tools_img_resize \
+					tools_int_in_tab \
 					tools_map_elem_find \
 					tools_map_elem_count \
 					tools_map_texture_select \
@@ -89,6 +94,7 @@ TESTS			=	$(addprefix $(TESTS_DIR), $(addsuffix .c, \
 					\
 					))
 OBJ				=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC) $(TESTS))
+OBJ_BONUS		=	$(patsubst $(SRC_DIR)%.c,$(OBJ_DIR_BONUS)%.o,$(SRC) $(TESTS))
 
 all : $(NAME)
 
@@ -97,14 +103,20 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(DEPS)
 	@if [ ! -d "$(dir $@)" ]; then mkdir $(dir $@); fi
 	$(CC) $(C_FLAGS) $(C_FLAGS_DEBUG) $(INCLUDES_H) -c $< -o $@
 
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR)%.c $(DEPS)
+	@if [ ! -d "$(OBJ_DIR_BONUS)" ]; then mkdir $(OBJ_DIR_BONUS); fi
+	@if [ ! -d "$(dir $@)" ]; then mkdir $(dir $@); fi
+	$(CC) $(C_FLAGS) $(C_FLAGS_DEBUG) $(INCLUDES_H) -D MOUV_ON_TERM=0 -c $< -o $@
+
 $(NAME) : $(OBJ) $(DEPS)
 	$(CC) $(C_FLAGS) $(C_FLAGS_DEBUG) $(INCLUDES_H) $(OBJ) $(LIBS) -o $(NAME)
 
-bonus :
-	@echo "Bonus pas encore faits."
+bonus : $(OBJ_BONUS) $(DEPS)
+	$(CC) $(C_FLAGS) $(C_FLAGS_DEBUG) $(INCLUDES_H) $(OBJ_BONUS) $(LIBS) -D MOUV_ON_TERM=0 -o $(NAME)
 
 clean :
 	rm -rf $(OBJ_DIR)
+	rm -rf $(OBJ_DIR_BONUS)
 
 fclean : clean
 	rm -rf $(NAME)
@@ -112,9 +124,12 @@ fclean : clean
 re : fclean all
 
 run : all
-	./$(NAME)
+	./$(NAME) "maps/valid/map_valid_ulysse.ber"
+
+runb : bonus
+	./$(NAME) "maps/valid/map_valid_ulysse.ber"
 
 check : all
-	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes ./$(NAME)
+	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes -s ./$(NAME)
 
-.PHONY : all clean fclean re bonus check
+.PHONY : all clean fclean re bonus check run runb check

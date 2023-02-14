@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 11:46:46 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/01 23:05:32 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:26:40 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*get_next_line(int fd)
 	}
 	if (rtn && b.e > 0)
 	{
-		tmp = ft_join(rtn, b.buf, b.s, ft_indexn(b.buf + b.s, b.e - b.s));//modif, original :  ... ft_indexn(b.buf + b.s, b.e - b.s) + 1);
+		tmp = ft_join(rtn, b.buf, b.s, ft_indexn(b.buf + b.s, b.e - b.s));
 		free(rtn);
 		rtn = tmp;
 		b.s += ft_indexn(b.buf + b.s, b.e - b.s) + 1;

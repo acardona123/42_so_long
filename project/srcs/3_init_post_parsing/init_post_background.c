@@ -6,13 +6,11 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:21:50 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 01:38:54 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:22:01 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
-
-
 
 /*generate the t_data associated to the background based on the map*/
 void	ft_init_post_background_init(t_global *glo)

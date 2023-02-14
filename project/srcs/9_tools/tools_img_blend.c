@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 15:50:07 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 02:55:02 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:27:24 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ void	ft_tools_img_blend(t_data *back, t_data *top, int x0, int y0)
 // 	mlx_put_image_to_window(mlx, win, background.img, 0, 0);
 // 	sleep(1);
 // 	front1.img = mlx_new_image(mlx, WIN_WIDTH / 2, WIN_HEIGHT / 2);
-// 	front1.addr = mlx_get_data_addr(front1.img, &front1.bpp, &front1.line_length, &front1.endian);
+// 	front1.addr = mlx_get_data_addr(front1.img, &front1.bpp, &front1
+//		.line_length, &front1.endian);
 // 	ft_square(&front1, 0, 0, WIN_WIDTH / 4, 0x000000FF);
 // 	ft_square(&front1, 0, WIN_WIDTH / 4, WIN_WIDTH / 4, 0x100000FF);
 // 	ft_square(&front1, WIN_WIDTH / 4, 0, WIN_WIDTH / 4, 0x600000FF);

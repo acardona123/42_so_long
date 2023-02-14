@@ -6,14 +6,14 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 19:16:13 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/12 04:51:42 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 02:56:17 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
 /*add a texture to the texturepack(relative path). dst elem of struct textures*/
-static int	fts_init_textures_tail_init(t_global *glo, t_texture_tail **dst,
+static void	fts_init_textures_tail_init(t_global *glo, t_texture_tail **dst,
 		char *path, unsigned int resize)
 {
 	int	endian;
@@ -37,9 +37,10 @@ static int	fts_init_textures_tail_init(t_global *glo, t_texture_tail **dst,
 		ft_tools_resize_img(glo, &((*dst)->data), resize);
 		(*dst)->img_width = resize;
 		(*dst)->img_height = resize;
+		(*dst)->data.pix_height = resize;
+		(*dst)->data.pix_width = resize;
 	}
-	(*dst)->data.endian = endian;//
-	return (0);
+	(*dst)->data.endian = endian;//revoir gestion endian
 }
 
 /*register all the textures (saved in garbage)*/
@@ -61,10 +62,10 @@ void	ft_init_post_textures_init(t_global *glo)
 		PATH_COL_ON, CHUNK_SIZE);
 	fts_init_textures_tail_init(glo, &(glo->textures.col_off),
 		PATH_COL_OFF, CHUNK_SIZE);
-	fts_init_textures_tail_init(glo, &(glo->textures.victory),
-		PATH_VICTORY, ft_tools_min_int(WIN_WIDTH, WIN_HEIGHT) / 48 * 48);
 	fts_init_textures_tail_init(glo, &(glo->textures.stat_sign),
 		PATH_SIGN, 0);
+	fts_init_textures_tail_init(glo, &(glo->textures.victory),
+		PATH_VICTORY, ft_tools_min_int(WIN_WIDTH, WIN_HEIGHT) / 48 * 48);
 	if (DEBUG)
 		write(1, " ok\n", 4);
 }

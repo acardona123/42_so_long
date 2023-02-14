@@ -5,39 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/01 20:38:48 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 03:35:55 by acardona         ###   ########.fr       */
+/*   Created: 2023/02/14 03:30:56 by acardona          #+#    #+#             */
+/*   Updated: 2023/02/14 03:31:22 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft_so_long.h"
-#include <X11/Xutil.h>
-#include <stddef.h>
-/*
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-	size_t	j;
+#include "../../includes/so_long.h"
 
-	
-	if (size == 0)
-		return (ft_strlen(src));
-	i = 0;
-	if (size != 0)
-	{
-		while (src[i] != '\0' && i < size - 1)
-		{
-			dst[i] = src[i];
-			i++;
-		}
-	}
-	dst[i] = '\0';
-	i = 0;
-	while (src[i] != '\0')
-		i++;
-	return (i);
-}
-*/
 void	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i_char;

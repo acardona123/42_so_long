@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 21:29:18 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/12 04:30:34 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/13 22:36:54 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,18 @@ static void	fts_tools_resize_bigger(t_global *glo, t_data *img_src,
 	fts_tansfert_imgptr(glo, img_new, img_src);
 }
 
-// /*Compress an image*/
-// static void	fts_tools_resize_smaller(t_garbage *gbimg, void *mlx,
-// 			t_data **img_src, int size_dst)
-// {
-// 	//to do =============================================================================
-// }
-
-void	ft_tools_resize_img(t_global *glo, t_data *img, unsigned int size)
+/*Compress an image*/
+/*
+static void	fts_tools_resize_smaller(t_garbage *gbimg, void *mlx,
+			t_data **img_src, int size_dst)
 {
-	// printf("bpp : %d\n", img->bpp);//
-	// printf("img_size : %d\nCHUNK_SIZE : %d\n", img->line_length, CHUNK_SIZE);//
+	//to do ====================
+}
+*/
+
+/*Resize img to target size. For now only scale up with entiere ratio*/
+void	ft_tools_resize_img(t_global *glo, t_data *img, int size)
+{
 	if (!glo || !img)
 		ft_garbage_group_free(&glo->garb.gbgroup, 1);
 	if (img->line_length * 8 / img->bpp == size)
@@ -81,6 +82,5 @@ void	ft_tools_resize_img(t_global *glo, t_data *img, unsigned int size)
 		write(1, "Error\nTexture size not suitable for resize:\n", 44);
 		ft_garbage_group_free(&glo->garb.gbgroup, 1);
 	}
-	//should be managing 2 cases : resizing up or down
 	fts_tools_resize_bigger(glo, (t_data *)img, size);
 }

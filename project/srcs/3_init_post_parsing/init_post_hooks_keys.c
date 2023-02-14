@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_post_hooks.c                                  :+:      :+:    :+:   */
+/*   init_post_hooks_keys.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:52:30 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/12 04:48:23 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:35:20 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	fts_key_hook_cam_set(int key_code, t_global *glo)
 			ft_game_cam_reset(glo);
 		}
 	}
-	else if (key_code == XK_plus)
-		glo->cam_speed = (glo->cam_speed + 1) % MAX_CAM_SPEED;
+	else if (key_code == XK_equal)
+		glo->cam_speed = 1 + (glo->cam_speed) % (MAX_CAM_SPEED);
 	else if (key_code == XK_minus && glo->cam_speed > 0)
 		(glo->cam_speed)--;
 	else if (key_code == XK_Home)
@@ -68,39 +68,30 @@ static void	fts_key_hook_cam_move(int key_code, t_global *glo, int step)
 }
 
 /*Init keys hooks*/
-static int	fts_key_hook(int key_code, t_global *glo)
+int	ft_post_hooks_key(int key, t_global *glo)
 {
 	int	step;
 
 	step = CHUNK_SIZE;//ici future step variable selon fps
-	if (key_code == XK_Escape)
+	if (key == XK_Escape || !glo->playing)
 		ft_end_close(glo, 0);
-	else if (glo->playing)
+	else if (ft_n_in_tab((int [5]){XK_Home, XK_c, XK_equal, XK_minus, 0}, key))
+		fts_key_hook_cam_set(key, glo);
+	else if (ft_n_in_tab((int [5]){XK_w, XK_s, XK_a, XK_d, 0}, key))
+		fts_key_hook_player(key, glo, step);
+	else if (ft_n_in_tab((int [5]){XK_Up, XK_Down, XK_Left, XK_Right, 0}, key))
 	{
-		if (key_code == XK_Home || key_code == XK_c || key_code == XK_plus
-			|| key_code == XK_minus)
-			fts_key_hook_cam_set(key_code, glo);
-		else if (glo->cam_lock || key_code == XK_w || key_code == XK_s
-			|| key_code == XK_a || key_code == XK_d)
-			fts_key_hook_player(key_code, glo, step);
-		else if (key_code == XK_Up || key_code == XK_Down || key_code == XK_Left
-			|| key_code == XK_Right)
-			fts_key_hook_cam_move(key_code, glo, step);
-		ft_game_display(glo);
-		if ((glo->map)[(glo->frames->co_player.y) / CHUNK_SIZE]
-			[(glo->frames->co_player.x) / CHUNK_SIZE] == 'E'
-			&& glo->cpt_col == 0)
-			ft_end_close(glo, 1);
+		if (glo->cam_lock)
+			fts_key_hook_player(key, glo, step);
+		else
+			fts_key_hook_cam_move(key, glo, step);
 	}
+	else
+		return (0);
+	ft_game_display(glo);
+	if ((glo->map)[(glo->frames->co_player.y) / CHUNK_SIZE]
+		[(glo->frames->co_player.x) / CHUNK_SIZE] == 'E'
+		&& glo->cpt_col == 0)
+		ft_end_close(glo, 1);
 	return (0);
-}
-
-void	ft_init_post_hooks_init(t_global *glo)
-{
-	if (DEBUG)
-		write(1, "=> frames init :\n", 17);
-	mlx_key_hook(glo->win, &fts_key_hook, glo);
-	//mlx_mouse_hook(glo->win, &fts_mouse_hook, &glo);
-	if (DEBUG)
-		write(1, " ok\n", 4);
 }

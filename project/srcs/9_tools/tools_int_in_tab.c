@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   tools_int_in_tab.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 03:31:31 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/14 03:31:34 by acardona         ###   ########.fr       */
+/*   Created: 2023/02/14 03:00:36 by acardona          #+#    #+#             */
+/*   Updated: 2023/02/14 03:06:45 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft_so_long.h"
+#include "../../includes/so_long.h"
 
-size_t	ft_strlen(const char *str)
+/*searches n in a tab of int terminated by null*/
+int	ft_n_in_tab(int	*tab, int n)
 {
-	size_t	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	while (*tab)
+	{
+		if (*tab == n)
+			return (1);
+		tab++;
+	}
+	return (0);
 }

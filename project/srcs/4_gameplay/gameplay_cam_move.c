@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 20:33:22 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/11 22:23:25 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 02:46:27 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,15 @@ void	ft_game_cam_reset(t_global *glo)
 	}
 }
 
-/*Relative mvt of the cam*/
-/*
-void	ft_game_cam_move(t_global *glo, int step, t_coord dir)
-{
-	if (dir.x && glo->cam_movable.x)
-	{
-		glo->cam_co.x += step * glo->cam_speed * dir.x;
-		if (glo->cam_co.x < glo->cam_co_min.x)
-			glo->cam_co.x = glo->cam_co_min.x;
-		else if (glo->cam_co.x > glo->cam_co_max.x)
-			glo->cam_co.x = glo->cam_co_max.x;
-	}
-	if (dir.y && glo->cam_movable.y)
-	{
-		glo->cam_co.y += step * glo->cam_speed * dir.y;
-		if (glo->cam_co.y < glo->cam_co_min.y)
-			glo->cam_co.y = glo->cam_co_min.y;
-		else if (glo->cam_co.y > glo->cam_co_max.y)
-			glo->cam_co.y = glo->cam_co_max.y;
-	}		
-}
-*/
-
 /*Relative mvt of the cam. Check=0 if cam move linked to player */
 void	ft_game_cam_move(t_global *glo, int step, t_coord dir)
 {
 	if (dir.x && glo->cam_movable.x)
 	{
-		glo->cam_co.x += step * glo->cam_speed * dir.x;
+		if (!glo->cam_lock)
+			glo->cam_co.x += step * glo->cam_speed * dir.x;
+		else
+			glo->cam_co.x += step * dir.x;
 		if (glo->cam_co.x < glo->cam_co_min.x)
 			glo->cam_co.x = glo->cam_co_min.x;
 		else if (glo->cam_co.x > glo->cam_co_max.x)
@@ -71,7 +51,10 @@ void	ft_game_cam_move(t_global *glo, int step, t_coord dir)
 	}
 	if (dir.y && glo->cam_movable.y)
 	{
-		glo->cam_co.y += step * glo->cam_speed * dir.y;
+		if (!glo->cam_lock)
+			glo->cam_co.y += step * glo->cam_speed * dir.y;
+		else
+			glo->cam_co.y += step * dir.y;
 		if (glo->cam_co.y < glo->cam_co_min.y)
 			glo->cam_co.y = glo->cam_co_min.y;
 		else if (glo->cam_co.y > glo->cam_co_max.y)

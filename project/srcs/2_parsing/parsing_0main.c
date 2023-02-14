@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 23:42:28 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/08 01:37:17 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 04:45:47 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	ft_parsing_map_error(t_garb_list **garb, int error_id)
 			"Map error : missing starting point/exit/collectible.");
 	if (error_id == 6)
 		ft_error_exit(garb, 1, "Map error : not solvable.");
+	if (error_id == 7)
+		ft_error_exit(garb, 1, "Map error : wrong format (requiered : .ber).");
 }
 
 void	ft_parsing_main(t_global *glo, char *map_name)
@@ -39,6 +41,7 @@ void	ft_parsing_main(t_global *glo, char *map_name)
 
 	if (DEBUG)
 		write(1, "=> map init:\n", 13);
+	ft_parsing_check_map_name(glo, map_name);
 	fd = ft_my_malloc(glo->garb.gbfd, sizeof(int));
 	*fd = open(map_name, O_RDONLY);
 	if (*fd < 0)

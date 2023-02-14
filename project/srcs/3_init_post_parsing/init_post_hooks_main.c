@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools_img_get_coords.c                             :+:      :+:    :+:   */
+/*   init_post_hooks1 copy.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/06 02:32:44 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/14 03:27:41 by acardona         ###   ########.fr       */
+/*   Created: 2023/01/23 10:52:30 by acardona          #+#    #+#             */
+/*   Updated: 2023/02/14 03:18:30 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
-/*Returns the address of a pixel described by its coordonates*/
-char	*ft_tools_get_pxl_addr(t_data *data, int x, int y)
+/*hook for clsing with the the cross*/
+static int	fts_destroy_hook( t_global *glo)
 {
-	char	*rtn;
+	ft_end_close(glo, 0);
+	return (0);
+}
 
-	if (!data || data->bpp == 0 || !data->addr
-		|| data->line_length == 0)
-	{
-		write(1, "Error\nIn ft_tools_get_pxl_addr.\n", 32);
-		return (0);
-	}
-	rtn = data->addr + data->line_length * data->bpp / 8 * y
-		+ x * data->bpp / 8;
-	return (rtn);
+/*main hooks*/
+void	ft_init_post_hooks_init_main(t_global *glo)
+{
+	if (DEBUG)
+		write(1, "=> frames init :\n", 17);
+	mlx_hook(glo->win, 2, 1L, &ft_post_hooks_key, glo);
+	mlx_hook(glo->win, 17, 0, fts_destroy_hook, glo);
+	if (DEBUG)
+		write(1, " ok\n", 4);
 }

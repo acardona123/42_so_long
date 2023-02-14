@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 20:24:01 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/10 17:44:43 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 02:32:23 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	fts_parse_lst_to_map(t_global *glo, t_list **lst)
 	t_list	*elem;
 	t_list	*tmp;
 
-	glo->map = ft_my_malloc(glo->garb.gbptr, ((glo->map_h) + 1) * sizeof(char *));
+	glo->map = ft_my_malloc(glo->garb.gbptr, ((glo->map_h) + 1)
+			* sizeof(char *));
 	elem = *lst;
 	i = 0;
 	while (elem)

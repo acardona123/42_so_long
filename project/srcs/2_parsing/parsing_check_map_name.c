@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   parsing_check_map_name.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/14 03:31:31 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/14 03:31:34 by acardona         ###   ########.fr       */
+/*   Created: 2023/02/14 04:24:26 by acardona          #+#    #+#             */
+/*   Updated: 2023/02/14 04:59:41 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/libft_so_long.h"
+#include "../../includes/so_long.h"
 
-size_t	ft_strlen(const char *str)
+/*Verifies if the map is a .ber*/
+void	ft_parsing_check_map_name(t_global *glo, char *map_name)
 {
-	size_t	i;
+	int	i;
+	int	j;
 
-	if (!str)
-		return (0);
+	if (!map_name)
+		ft_parsing_map_error(&glo->garb.gbgroup, 7);
 	i = 0;
-	while (str[i])
+	while (map_name[i])
 		i++;
-	return (i);
+	j = 0;
+	while (j < 4)
+	{
+		if (map_name[i - 1 - j] != ".ber"[3 - j])
+			ft_parsing_map_error(&glo->garb.gbgroup, 7);
+		j++;
+	}
 }

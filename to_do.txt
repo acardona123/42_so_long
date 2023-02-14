@@ -1,13 +1,13 @@
-
-
 -gameplay si mouvement fluide :
  -faire les fonctions permettant de verifier si collision du joueur avec un autre elem (gameplay_move.c)
 
--cam :
-voir pk la vitesse variable de la camera ne fonctionne pas
 
 - bonus a gerer
 
+parsing map .ber
+
+
+================================
 
 CONTROLS :
 
@@ -24,6 +24,6 @@ d player right
 6 cam right
 [c] cam lock/unlock
 [HOME] cam center to player
-- cam speed reduce
-+ cam speed increase
+- (main keypad) cam speed reduce
+=  (main keypad) cam speed increase
 

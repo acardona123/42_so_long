@@ -6,38 +6,40 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 02:30:38 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/12 05:19:54 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 02:46:01 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/so_long.h"
 
+static void	fts_display_stat_sub(t_global *glo, char *str1, int n, t_coord co)
+{
+	char	str[12];
+	char	*str2;
+
+	*str = 0;
+	ft_itoa_mod(str, n);
+	str2 = ft_strjoin(glo->garb.gbptr, str1, str);
+	mlx_string_put(glo->mlx, glo->win, co.x, co.y, 0xFFED6F, str2);
+	ft_garbage_free_one(glo->garb.gbptr, str2);
+}
+
 /*Dipsplay player stats and game params on the screen*/
 static void	fts_display_stat(t_global	*glo)
 {
-	char	str[12];
-	char	*str1;
-
-	*str = 0;
 	mlx_put_image_to_window(glo->mlx, glo->win,
 		glo->textures.stat_sign->data.img, 0, 0);
 	if (glo->cpt_col)
-	{
-		ft_itoa_mod(str, glo->cpt_col);
-		str1 = ft_strjoin(glo->garb.gbptr, "Missing hearts : ", str);
-		mlx_string_put(glo->mlx, glo->win, 2, 12, 0xFFED6F, str1);
-		ft_garbage_free_one(glo->garb.gbptr, str1);
-	}
+		fts_display_stat_sub(glo, "Missing hearts : ", glo->cpt_col,
+			(t_coord){2, 12});
 	else
 		mlx_string_put(glo->mlx, glo->win, 2, 12, 0xFFED6F, "Exit opened");
-	ft_itoa_mod(str, glo->cpt_move);
-	str1 = ft_strjoin(glo->garb.gbptr, "Mouvements : ", str);
-	mlx_string_put(glo->mlx, glo->win, 2, 24, 0xFFED6F, str1);
-	ft_garbage_free_one(glo->garb.gbptr, str1);
+	fts_display_stat_sub(glo, "Mouvements : ", glo->cpt_move, (t_coord){2, 24});
 	if (glo->cam_lock)
 		mlx_string_put(glo->mlx, glo->win, 2, 36, 0xFFED6F, "Camera locked");
 	else
-		mlx_string_put(glo->mlx, glo->win, 2, 36, 0xFFED6F, "Camera unlocked");
+		fts_display_stat_sub(glo, "Camera unlocked: v", glo->cam_speed,
+			(t_coord){2, 36});
 }
 
 /*Only displays mouvement count on the screen*/
@@ -61,5 +63,4 @@ void	ft_game_display(t_global *glo)
 		fts_display_stat(glo);
 	else
 		fts_display_minimal_stat(glo);
-
 }

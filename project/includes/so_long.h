@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/12 05:22:36 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 04:50:21 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define SO_LONG_H
 
 # define DEBUG 0
+# ifndef MOUV_ON_TERM
+#  define MOUV_ON_TERM 1
+# endif
 
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -24,11 +27,10 @@
 # include "libft_so_long.h"
 # include "get_next_line.h"
 
-# define WIN_WIDTH 500
-# define WIN_HEIGHT 500
+# define WIN_WIDTH 1048
+# define WIN_HEIGHT 1048
 # define CHUNK_SIZE 64
 
-# define MAP_NAME "../maps/valid/map_valid_7x7_exit_test.txt"
 # define PATH_EXIT_LOCK "includes/textures/exit_locked.xpm"
 # define PATH_EXIT_OPEN "includes/textures/exit_open.xpm"
 # define PATH_GROUND "includes/textures/ground.xpm"
@@ -94,6 +96,7 @@ typedef struct s_frames
 typedef struct s_global
 {
 	int					local_endian;
+	char				*map_path;
 	t_garbage_resume	garb;
 	void				*mlx;
 	void				*win;
@@ -145,23 +148,28 @@ void		ft_init_pre_parsing_main(t_global *glo);
 void		ft_parsing_map_error(t_garb_list **garb, int error_id);
 void		ft_parsing_main(t_global *glo, char *map_name);
 /*
- parsing_file_to_map.c */
-void		ft_parsing_file_to_map(t_global *glo, int *fd);
-/*
  parsing_map_check_content.c */
 void		ft_parsing_check_map_content(t_global *glo);
+/*
+ parsing_chaeck_map_name.c */
+void		ft_parsing_check_map_name(t_global *glo, char *map_name);
 /*
  parsing_map_check_path.c*/
 void		ft_parsing_check_map_path(t_global *glo);
 /*
-
+ parsing_file_to_map.c */
+void		ft_parsing_file_to_map(t_global *glo, int *fd);
+/*
 
 ===== 3_INIT POST PARSING=====
 init_post_0main.c */
 void		ft_init_post_parsing_main(t_global *glo);
 /*
  init_post_hooks.c */
-void		ft_init_post_hooks_init(t_global *glo);
+void		ft_init_post_hooks_init_main(t_global *glo);
+/*
+ init_post_hook_key.c */
+int			ft_post_hooks_key(int key, t_global *glo);
 /*
  init_post_textures.c*/
 void		ft_init_post_textures_init(t_global *glo);
@@ -202,12 +210,15 @@ void		ft_tools_img_blend(t_data *back, t_data *top, int x0, int y0);
  tools_img_cpy.c */
 void		ft_tools_img_sub_cpy(t_img_cpy cpy);
 void		ft_tools_img_cpy(t_data *src, t_data *dst);
+/* tools_img_draw_rec.c */
+void		ft_tools_img_draw_rec(t_data *dst, int color, t_coord pos,
+				t_coord dim);
 /*
  tools_img_new_img.c*/
 t_data		*ft_tools_img_new(t_global *glo, int width, int height);
 /*
  tools_img_resize.c */
-void		ft_tools_resize_img(t_global *glo, t_data *img, unsigned int size);
+void		ft_tools_resize_img(t_global *glo, t_data *img, int size);
 /*
  tools_error_exit.c*/
 void		ft_error_exit(t_garb_list **garb, int error_id, char *error_msg);
@@ -225,6 +236,9 @@ long int	ft_tools_elem_count(char **map, char elem);
 /*
  tools_map_texture_select.c*/
 t_data		*ft_chunk_texture_selec(t_global *glo, int x, int y);
+/*
+ tools_int_in_tab.c */
+int			ft_n_in_tab(int	*tab, int n);
 /*
  tools_pixel.c */
 void		ft_my_mlx_pixel_put(t_data *data, int x, int y, int color);

@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:53:24 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/12 05:19:27 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:11:20 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_init_post_parsing_main(t_global *glo)
 	ft_init_post_background_init(glo);
 	fts_init_post_frames_init(glo);
 	fts_init_post_camera_init(glo);
-	ft_init_post_hooks_init(glo);
+	ft_init_post_hooks_init_main(glo);
 	if (DEBUG)
 		write(1, "- End of initialisation  -\n\n", 28);
 }
