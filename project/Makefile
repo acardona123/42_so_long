@@ -44,10 +44,10 @@ SRC_4_GAMEPLAY	=	$(addprefix 4_gameplay/, \
 					gameplay_open_exit \
 					gameplay_player_move \
 					)
-SRC_8_END			=	$(addprefix 8_end/, \
+SRC_5_END			=	$(addprefix 5_end/, \
 					end_close \
 					)
-SRC_9_TOOLS		=	$(addprefix 9_tools/, \
+SRC_6_TOOLS		=	$(addprefix 6_tools/, \
 					tools_error_exit \
 					tools_extremum_int \
 					tools_img_blend \
@@ -61,7 +61,7 @@ SRC_9_TOOLS		=	$(addprefix 9_tools/, \
 					tools_map_texture_select \
 					tools_pxl \
 					)
-SRC_10_LIBFT	=	$(addprefix 10_libft/, \
+SRC_7_LIBFT	=	$(addprefix 7_libft/, \
 					ft_itoa_nl \
 					ft_itoa \
 					ft_lstadd_back \
@@ -73,7 +73,7 @@ SRC_10_LIBFT	=	$(addprefix 10_libft/, \
 					ft_strlcpy \
 					ft_strlen \
 					)
-SRC_11_GNL		=	$(addprefix 11_gnl/, \
+SRC_8_GNL		=	$(addprefix 8_gnl/, \
 					get_next_line \
 					get_next_line_utils \
 					)
@@ -84,10 +84,10 @@ SRC 			=	$(addprefix $(SRC_DIR), $(addsuffix .c, \
 					$(SRC_2_PARSING) \
 					$(SRC_3_INIT_POST) \
 					$(SRC_4_GAMEPLAY) \
-					$(SRC_8_END) \
-					$(SRC_9_TOOLS) \
-					$(SRC_10_LIBFT) \
-					$(SRC_11_GNL) \
+					$(SRC_5_END) \
+					$(SRC_6_TOOLS) \
+					$(SRC_7_LIBFT) \
+					$(SRC_8_GNL) \
 					0main \
 					))
 TESTS			=	$(addprefix $(TESTS_DIR), $(addsuffix .c, \
@@ -124,10 +124,10 @@ fclean : clean
 re : fclean all
 
 run : all
-	./$(NAME) "maps/valid/map_valid_ulysse.ber"
+	./$(NAME) "maps/valid/map_valid_20x20.ber"
 
 runb : bonus
-	./$(NAME) "maps/valid/map_valid_ulysse.ber"
+	./$(NAME) "maps/valid/map_valid_20x20.ber"
 
 check : all
 	valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes -s ./$(NAME)

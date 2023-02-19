@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 23:39:20 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/14 04:50:21 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/14 05:23:04 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_frames
 typedef struct s_global
 {
 	int					local_endian;
-	char				*map_path;
 	t_garbage_resume	garb;
 	void				*mlx;
 	void				*win;

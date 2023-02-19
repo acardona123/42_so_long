@@ -1,12 +1,12 @@
 /* XPM */
-static char *_605f966adc94be7aefb458038253a0beC6s9P2a9oWRYain[] = {
+static char *_374c8664f5349b98580be5a7ce16c6eNgqhpDZSYQbzyGH0[] = {
 /* columns rows colors chars-per-pixel */
 "16 16 6 1 ",
 "  c None",
 ". c black",
-"X c gray75",
-"o c #F5CBBD",
-"O c #E6E6E6",
+"X c #B9B9B9",
+"o c #EDD0B1",
+"O c #D9D9DB",
 "+ c white",
 /* pixels */
 "                ",
@@ -14,8 +14,8 @@ static char *_605f966adc94be7aefb458038253a0beC6s9P2a9oWRYain[] = {
 "    ........    ",
 "   ..........   ",
 "   ..XXXXXX..   ",
-"  ..X+.XX+.X..  ",
-"  ..X..XX..X..  ",
+"  ..X.+XX.+X..  ",
+"  .XX..XX..XX.  ",
 "  .XXXooooXXX.  ",
 " ..X+++oo+++X.. ",
 " ..++++++++++.. ",

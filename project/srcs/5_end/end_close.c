@@ -6,7 +6,7 @@
 /*   By: acardona <acardona@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 03:02:07 by acardona          #+#    #+#             */
-/*   Updated: 2023/02/14 03:25:59 by acardona         ###   ########.fr       */
+/*   Updated: 2023/02/19 16:28:54 by acardona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_end_close(t_global *glo, char succes)
 			WIN_HEIGHT / 2 - glo->textures.victory->img_height / 2);
 	}
 	write(1, "\nThank you for playing, see you soon.\n\n", 39);
+	write(1, "Textures : RPG Nature Tileset by Stealthix.\n", 44);
 	glo->playing = 0;
-	if (DEBUG)
-		write(1, " ok\n", 4);
 }
