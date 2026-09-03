@@ -125,6 +125,7 @@ tests/                     standalone probes, not part of the game binary
 ## 📚 Resources
 
 - [42Paris/minilibx-linux](https://github.com/42Paris/minilibx-linux)
+- [42_Cub3D](https://github.com/acardona123/42_Cub3D), the later MiniLibX project: first-person raycasting instead of a top-down grid
 
 ---
 
